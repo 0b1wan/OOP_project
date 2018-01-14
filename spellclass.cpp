@@ -39,8 +39,6 @@ class Spell
         int get_mana() const{
             return mana;
         }
-        virtual int get_reduction() = 0;
-        virtual int get_rounds() = 0;
 };
 
 class Icespell : public Spell

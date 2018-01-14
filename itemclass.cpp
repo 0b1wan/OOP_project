@@ -27,11 +27,6 @@ class Item
         int get_minlevel() const{
             return minlevel;
         }
-        virtual int get_damage() = 0;
-        virtual bool get_hand() = 0;
-        virtual int get_reduction() = 0;
-        virtual string get_ability() = 0;
-        virtual int get_increasement() = 0;
 };
 
 class Weapon : public Item
