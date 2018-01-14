@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 class Spell
 {
     private:
@@ -17,7 +19,7 @@ class Spell
         }
         virtual ~Spell()
         {
-            cout << "Just destroyed a Spell" << endl
+            cout << "Just destroyed a Spell" << endl;
         }
         string get_name() const{
             return name;
@@ -47,7 +49,7 @@ class Icespell : public Spell
         const int reduction;
         const int rounds;
     public:
-        Icespell(string a, int b, int c, int d, int e, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
+        Icespell(string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
             cout << "Just constructed an Icespell" << endl;
         }
@@ -69,7 +71,7 @@ class Firespell : public Spell
         const int reduction;
         const int rounds;
     public:
-        Firespell(string a, int b, int c, int d, int e, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
+        Firespell(string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
             cout << "Just constructed a Firespell" << endl;
         }
@@ -91,11 +93,11 @@ class Lightingspell : public Spell
         const int reduction;
         const int rounds;
     public:
-        Lighting (string a, int b, int c, int d, int e, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
+        Lightingspell (string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
             cout << "Just constructed a Lightingspell" << endl;
         }
-        ~Lighting()
+        ~Lightingspell()
         {
             cout << "Just destroyed a Lightingspell" << endl;
         }

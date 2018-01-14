@@ -15,8 +15,5 @@ int main(int argc, const char * argv[]) {
 
     
 
-    Warrior andreas;
-
-    cout << endl;
     return 0;
 }
