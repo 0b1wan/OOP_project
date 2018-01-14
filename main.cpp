@@ -8,10 +8,15 @@
 
 #include <iostream>
 #include "living.hpp"
+#include "itemclass.cpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+
+
+    
+    Potion mypot("sfdsf",23,23,"asdf",23);
 
     
 
