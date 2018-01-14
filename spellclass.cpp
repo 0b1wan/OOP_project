@@ -34,6 +34,8 @@ class Spell
         int get_mana() const{
             return mana;
         }
+        virtual int get_reduction() = 0;
+        virtual int get_rounds() = 0;
 };
 
 class Icespell : public Spell
@@ -50,10 +52,10 @@ class Icespell : public Spell
         {
             cout << "Just destroyed an Icespell" << endl;
         }
-        int get_reduction() const{
+        int get_reduction(){
             return reduction;
         }
-        int get_rounds() const{
+        int get_rounds(){
             return rounds;
         }
 }
@@ -72,10 +74,10 @@ class Firespell : public Spell
         {
             cout << "Just destroyed a Firespell" << endl;
         }
-        int get_reduction() const{
+        int get_reduction(){
             return reduction;
         }
-        int get_rounds() const{
+        int get_rounds(){
             return rounds;
         }
 }
@@ -94,10 +96,10 @@ class Lightingspell : public Spell
         {
             cout << "Just destroyed a Lightingspell" << endl;
         }
-        int get_reduction() const{
+        int get_reduction(){
             return reduction;
         }
-        int get_rounds() const{
+        int get_rounds(){
             return rounds;
         }
 }
