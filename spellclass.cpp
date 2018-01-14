@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 #include <iostream>
 #include <string>
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 86894b2719b3f68a6ddca2b51dd99d050db045d2
 class Spell
 {
     private:
@@ -106,3 +112,4 @@ class Lightingspell : public Spell
             return rounds;
         }
 }
+>>>>>>> 2a7e8e3d3e1f05ae078a63da1f828bdd3501a9ab

@@ -7,10 +7,16 @@
 //
 
 #include <iostream>
+#include "living.hpp"
+
+using namespace std;
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+
     
+
+    Warrior andreas;
+
+    cout << endl;
     return 0;
 }
