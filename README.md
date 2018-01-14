@@ -1,2 +1,2 @@
 # oop_project
-role playing game
+rpg game
