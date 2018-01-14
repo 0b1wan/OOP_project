@@ -15,5 +15,10 @@ class Block
         {
             cout << "Just destroyed a Block" << endl;
         }
-        
-}
+        string get_condition() const{
+            return condition;
+        }
+        bool get_contains() const{
+            return contains;
+        }
+};

@@ -30,7 +30,7 @@ class Item
         virtual int get_reduction() = 0;
         virtual string get_ability() = 0;
         virtual int get_increasement() = 0;
-}
+};
 
 class Weapon : public Item
 {
@@ -52,7 +52,7 @@ class Weapon : public Item
         bool get_hand(){
             return hand;
         }
-}
+};
 
 class Armor : public Item
 {
@@ -71,7 +71,7 @@ class Armor : public Item
             return reduction;
         }
         
-}
+};
 
 class Potion : public Item
 {
@@ -93,4 +93,4 @@ class Potion : public Item
         int get_increasement(){
             return increasement;
         }
-}
+};
