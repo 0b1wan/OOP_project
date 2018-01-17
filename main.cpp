@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "living.hpp"
-#include "itemclass.cpp"
+#include "item.cpp"
 
 using namespace std;
 
