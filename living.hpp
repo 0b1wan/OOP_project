@@ -16,16 +16,21 @@
 
 using namespace std;
 
+
+
+/*********************** LIVING ***********************/
 class Living
 {
 protected:
-    std::string name;
+    string name;
+
     int level;
     int health;
 
 public:
-    Living(int lv , int hlth)
+    Living(string nm, int lv , int hlth)
     {
+        name = nm;
         level = lv;
         health = hlth + (lv*100);
     }
@@ -33,11 +38,17 @@ public:
     ~Living()
     { }
 
-    virtual int get_level() = 0;
+    virtual string get_name() =0;
+    virtual int get_level() =0;
     virtual int get_health() =0;
+    virtual void set_health(int) =0;
+    virtual void print_stats() =0;
 };
 
 
+
+
+/*********************** HERO ***********************/
 class Hero : public Living
 {
 
@@ -48,14 +59,16 @@ protected:
     int agility;
     int money;
     int experience;
+    string hero_type;
+
     // std::vector<Weapon> Weapons;
     // std::vector<Armor>  Armour;
     // std::vector<Potions> Potions;
     // std::vector<void*> inventory;
 
 public:
-    Hero(int lv, int hlth, int man, int str, int dex, int ag, int mon,
-         int exp) : Living(lv, hlth)
+    Hero(string nm, int lv, int hlth, int man, int str, int dex, int ag, int mon,
+         int exp) : Living(nm, lv, hlth)
     {
         level = lv;
         mana = man;
@@ -69,6 +82,10 @@ public:
     ~Hero()
     { }
 
+    string get_name()
+    {
+        return name;
+    }
     int get_level()
     {
         return level;
@@ -76,6 +93,10 @@ public:
     int get_health()
     {
         return health;
+    }
+    void set_health(int hlth)
+    {
+        health += hlth;
     }
     int get_mana()
     {
@@ -102,6 +123,9 @@ public:
         return experience;
     }
 
+    int do_dmg(class Monster*);
+    int accept_exp(class Monster*);
+    void print_stats();
 };
 
 
@@ -111,9 +135,10 @@ public:
 class Warrior : public Hero
 {
 public:
-    Warrior(int lv=0,int hlth=100, int man=100, int str=50, int dex=30, int ag=50, int mon=1000,
-            int exp=0) : Hero(lv, hlth, man, str, dex, ag, mon, exp)
+    Warrior(string nm="Brave Warrior", int lv=0,int hlth=100, int man=100, int str=50, int dex=30, int ag=50, int mon=1000,
+            int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
+        hero_type = "Warrior";
 #ifdef _DEBUG
         cout << "Just constructed a Warrior" << endl;
 #endif
@@ -134,9 +159,11 @@ public:
 class Sorcerer : public Hero
 {
 public:
-    Sorcerer(int lv=0,int hlth=100, int man=100, int str=30, int dex=50, int ag=50, int mon=1000,
-             int exp=0) : Hero(lv, hlth, man, str, dex, ag, mon, exp)
+    Sorcerer(string nm="Clever Sorcerer", int lv=0,int hlth=100, int man=100, int str=30, int dex=50, int ag=50, int mon=1000,
+             int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
+        hero_type = "Sorcerer";
+
 #ifdef _DEBUG
         cout << "Just constructed a Sorcerer" << endl;
 #endif
@@ -158,9 +185,10 @@ public:
 class Paladin : public Hero
 {
 public:
-    Paladin(int lv=0,int hlth=100, int man=100, int str=50, int dex=50, int ag=30, int mon=1000,
-            int exp=0) : Hero(lv, hlth, man, str, dex, ag, mon, exp)
+    Paladin(string nm="Fierce Paladin", int lv=0,int hlth=100, int man=100, int str=50, int dex=50, int ag=30, int mon=1000,
+            int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
+        hero_type = "Paladin";
 #ifdef _DEBUG
         cout << "Just constructed a Paladin" << endl;
 #endif
@@ -185,9 +213,10 @@ protected:
     int damage_max;
     int defence;
     int miss_chance;
+    string monster_type;
 
 public:
-    Monster(int lvl, int hlth, int dmin, int dmax, int def, int miss) : Living(lvl, hlth)
+    Monster(string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) : Living(nm, lvl, hlth)
     {
         damage_max = dmax;
         damage_min = dmin;
@@ -198,6 +227,10 @@ public:
     ~Monster()
     { }
 
+    string get_name()
+    {
+        return name;
+    }
     int get_level()
     {
         return level;
@@ -205,6 +238,10 @@ public:
     int get_health()
     {
         return health;
+    }
+    void set_health(int hlth)
+    {
+        health += hlth;
     }
     int get_damage_max()
     {
@@ -222,6 +259,9 @@ public:
     {
         return miss_chance;
     }
+
+    int accept_dmg(int amount);
+    void print_stats();
 };
 
 
@@ -231,8 +271,9 @@ public:
 class Dragon : public Monster
 {
 public:
-    Dragon(int lvl=0, int hlth=50, int dmin=10, int dmax=15, int def=10, int miss=10) : Monster(lvl,hlth,dmin,dmax,def,miss)
+    Dragon(string nm="White Dragon", int lvl=0, int hlth=50, int dmin=10, int dmax=15, int def=10, int miss=10) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
+        monster_type = "Dragon";
 #ifdef _DEBUG
         cout << "Just constructed a Dragon" << endl;
 #endif
@@ -254,8 +295,9 @@ public:
 class Exosceleton : public Monster
 {
 public:
-    Exosceleton(int lvl=0, int hlth=50, int dmin=5, int dmax=10, int def=30, int miss=10) : Monster(lvl,hlth,dmin,dmax,def,miss)
+    Exosceleton(string nm="Crispy Exo", int lvl=0, int hlth=50, int dmin=5, int dmax=10, int def=30, int miss=10) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
+        monster_type = "Exosceleton";
 #ifdef _DEBUG
         cout << "Just constructed an Exosceleton" << endl;
 #endif
@@ -277,8 +319,9 @@ public:
 class Spirit : public Monster
 {
 public:
-    Spirit(int lvl=0, int hlth=50, int dmin=5, int dmax=10, int def=10, int miss=40) : Monster(lvl,hlth,dmin,dmax,def,miss)
+    Spirit(string nm="Semi-Visible Spirit", int lvl=0, int hlth=50, int dmin=5, int dmax=10, int def=10, int miss=40) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
+        monster_type = "Spirit";
 #ifdef _DEBUG
         cout << "Just constructed a Spirit" << endl;
 #endif

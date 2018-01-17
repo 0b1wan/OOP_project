@@ -6,7 +6,7 @@
 //  Copyright © 2018 Zulufox. All rights reserved.
 //
 
-#define _DEBUG
+//#define _DEBUG
 
 #include <iostream>
 #include "living.hpp"
@@ -17,9 +17,16 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
 
-    Warrior awarrior;
-    Spirit maspirit(10);
-    Dragon WhiteDragon(100);
+    Warrior BraveWarrior("Andreas");
+    Spirit QuietSpirit("Little Bitch");
+    Dragon WhiteDragon("some mofo");
+
+    WhiteDragon.print_stats();
+
+    BraveWarrior.do_dmg(&WhiteDragon);
+    BraveWarrior.do_dmg(&WhiteDragon);
+
+    WhiteDragon.print_stats();
 
     return 0;
 }
