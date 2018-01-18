@@ -17,16 +17,23 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
 
-    Warrior BraveWarrior("Andreas");
+    Warrior BraveWarrior("Jessy");
     Spirit QuietSpirit("Little Bitch");
-    Dragon WhiteDragon("some mofo");
+    Dragon WhiteDragon("Some Mofo");
+    Exosceleton exo("Mike");
+    Dragon drago("Pirate",100);
 
-    WhiteDragon.print_stats();
+    BraveWarrior.print_stats();
 
-    BraveWarrior.do_dmg(&WhiteDragon);
-    BraveWarrior.do_dmg(&WhiteDragon);
+    BraveWarrior.attack(&WhiteDragon);
+    BraveWarrior.attack(&QuietSpirit);
+    BraveWarrior.attack(&exo);
 
-    WhiteDragon.print_stats();
+    BraveWarrior.print_stats();
+
+    BraveWarrior.attack(&drago);
+
+    BraveWarrior.print_stats();
 
     return 0;
 }
