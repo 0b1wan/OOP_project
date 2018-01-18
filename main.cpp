@@ -16,12 +16,13 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    srand(((unsigned int)time(NULL)));
 
-    Warrior BraveWarrior("Jessy");
+    Warrior BraveWarrior("Jessy", 21);
     Spirit QuietSpirit("Little Bitch");
     Dragon WhiteDragon("Some Mofo");
     Exosceleton exo("Mike");
-    Dragon drago("Pirate",100);
+    Dragon drago("Black Eye", 21);
 
     BraveWarrior.print_stats();
 
@@ -30,6 +31,7 @@ int main(int argc, const char * argv[]) {
     BraveWarrior.attack(&exo);
 
     BraveWarrior.print_stats();
+    drago.print_stats();
 
     BraveWarrior.attack(&drago);
 

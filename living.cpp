@@ -11,7 +11,7 @@
 int Hero::do_dmg(class Monster* enemy)
 {
 
-    // check fatal
+    // Do damage to monster
     if (enemy->accept_dmg(this->strenght /* + weapon strength */) == -1)
     {
         cout << enemy->monster_type << "(" << enemy->name << ") was killed" << endl;
@@ -19,7 +19,47 @@ int Hero::do_dmg(class Monster* enemy)
         accept_exp(enemy);
         
     }
+    // accept damage from monster
+    if (accept_dmg(enemy) == -1)
+    {
+        cout << hero_type << "(" << name << ") was killed by a " << enemy->monster_type << endl;
+    }
+    else
+    {
+        cout << hero_type << "(" << name << ") took some damage" << endl;
+    }
 
+
+    return 0;
+}
+
+void Monster::do_dmg(class Hero* enemy)
+{
+
+
+}
+
+int Hero::accept_dmg(class Monster* enemy)
+{
+    int dodge = rand() % 100 + 1;
+    int chance = 0.01*agility*agility;
+    if (chance > 90)
+        dodge = (dodge <= 90);
+    else
+        dodge = (dodge <= chance);
+
+    if (dodge)
+    {
+        cout << "Attack to " << name << " dodged" << endl;
+    }
+    else
+    {
+        int damage = rand() % (enemy->damage_max - enemy->damage_min) + enemy->damage_min;
+        health -= damage;
+        if (health <= 0)
+            return -1;
+        return damage;
+    }
     return 0;
 }
 
@@ -27,6 +67,7 @@ void Hero::attack(class Monster* enemy, int times)
 {
     while((times-- > 0) && (enemy->health > 0)) {
         do_dmg(enemy);
+        enemy->do_dmg(this);
     }
 }
 
@@ -83,9 +124,13 @@ void Hero::print_stats()
         cout << "--- Statistics for Paladin: " << name << endl;
 
     cout << " Level: " << level << endl;
-    cout << " Health: " << health << "/" << max_health << endl;
+    cout << " Health: " << health << "/" << max_health
+    << " (" << (int)(((float)health/max_health)*100) << "%)" << endl;
+    cout << " Mana: " << mana << "/" << max_mana
+    << " (" << (int)(((float)mana/max_mana)*100) << "%)" << endl;
     cout << " Damage: " << strenght /* + weapon damage */ << endl;
-    cout << " Experience: " << experience << "/" << levelup_experience << endl;
+    cout << " Experience: " << experience << "/" << levelup_experience
+    << " (" << (int)(((float)experience/levelup_experience)*100) << "%)" << endl;
     cout << " Gold: " << gold << endl;
     cout << " Strength: " << strenght << endl;
     cout << " Dexterity: " << dexterity << endl;
@@ -113,3 +158,10 @@ void Monster::print_stats()
     cout << " Kill Exp: " << kill_exp << endl << endl;
 
 }
+
+bool Living::alive()
+{
+    return (health > 0);
+}
+
+

@@ -13,6 +13,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <math.h>
+#include <random>
 
 using namespace std;
 
@@ -40,6 +42,7 @@ public:
     { }
 
     virtual void print_stats() =0;
+    bool alive();
 };
 
 
@@ -74,26 +77,29 @@ public:
          int exp) : Living(nm, lv, hlth)
     {
         level = lv;
-        mana = man;
-        max_mana = man;
-        strenght = str;
-        dexterity = dex;
-        agility = ag;
+        max_mana = man + man*level;
+        mana = max_mana;
+        strenght = str + (0.1)*str*level;
+        dexterity = dex + (0.1)*dex*level;
+        agility = ag + (0.1)*ag*level;
         gold = mon;
         experience = exp;
         levelup_exp_modifier = 25;
-        levelup_experience = levelup_exp_modifier;
+        levelup_experience = levelup_exp_modifier*level;
         levelup_atrb_modifier = 10;
     }
 
     ~Hero()
     { }
 
+    // Main functions
+    int  do_dmg(class Monster*);
+    int accept_dmg(class Monster*);
 
-
-    int do_dmg(class Monster*);
     void accept_exp(class Monster*);
-    void attack(class Monster*, int times=9999);
+    void attack(class Monster*, int times=999999);
+
+    // Helper functions
     virtual void level_up();
     void print_stats();
 };
@@ -105,7 +111,7 @@ public:
 class Warrior : public Hero
 {
 public:
-    Warrior(string nm="Brave Warrior", int lv=1,int hlth=100, int man=100, int str=50, int dex=30, int ag=50, int mon=1000,
+    Warrior(string nm="Brave Warrior", int lv=1,int hlth=100, int man=100, int str=50, int dex=30, int ag=20, int mon=1000,
             int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Warrior";
@@ -131,7 +137,7 @@ public:
 class Sorcerer : public Hero
 {
 public:
-    Sorcerer(string nm="Clever Sorcerer", int lv=1,int hlth=100, int man=100, int str=30, int dex=50, int ag=50, int mon=1000,
+    Sorcerer(string nm="Clever Sorcerer", int lv=1,int hlth=100, int man=100, int str=30, int dex=20, int ag=20, int mon=1000,
              int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Sorcerer";
@@ -157,7 +163,7 @@ public:
 class Paladin : public Hero
 {
 public:
-    Paladin(string nm="Fierce Paladin", int lv=1,int hlth=100, int man=100, int str=50, int dex=50, int ag=30, int mon=1000,
+    Paladin(string nm="Fierce Paladin", int lv=1,int hlth=100, int man=100, int str=50, int dex=20, int ag=10, int mon=1000,
             int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Paladin";
@@ -193,9 +199,9 @@ public:
 
     Monster(string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) : Living(nm, lvl, hlth)
     {
-        damage_max = dmax;
-        damage_min = dmin;
-        defence = def;
+        damage_max = dmax + 3*dmax*sqrt((double)level);
+        damage_min = dmin + dmax*sqrt((double)level);
+        defence = def + def*sqrt((double)level);
         miss_chance = miss;
         kill_exp = level*10;
         kill_gold = level*20;
@@ -206,6 +212,7 @@ public:
 
 
     int accept_dmg(int amount);
+    void do_dmg(Hero*);
     void print_stats();
 };
 
