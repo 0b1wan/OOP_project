@@ -1,4 +1,4 @@
-#include "blockclass.cpp"
+#include "block.cpp"
 
 class Grid
 {
@@ -45,4 +45,4 @@ class Grid
         {
             
         }
-}
+};
