@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     srand(((unsigned int)time(NULL)));
 
-    Warrior BraveWarrior("Jessy", 21);
+    Warrior BraveWarrior("Jessy", 1);
     Spirit QuietSpirit("Little Bitch");
     Dragon WhiteDragon("Some Mofo");
     Exosceleton exo("Mike");

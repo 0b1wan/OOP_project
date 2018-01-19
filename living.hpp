@@ -100,6 +100,7 @@ public:
     int  do_dmg(class Monster*);
     int accept_dmg(class Monster*);
 
+    void accept_gold(class Monster*);
     void accept_exp(class Monster*);
     void attack(class Monster*, int times=999999);
 
@@ -196,7 +197,7 @@ public:
         defence = def + def*sqrt((double)level);
         miss_chance = miss;
         kill_exp = level*10;
-        kill_gold = level*20;
+        kill_gold = level*50;
     }
 
     ~Monster()

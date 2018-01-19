@@ -29,6 +29,8 @@ void Living::ressurect() {
 
 void Hero::attack(class Monster* enemy, int times)
 {
+    if (!enemy->isAlive() || !this->isAlive())
+        return;
     cout << " --- FIGHT: " << who() << " vs " << enemy->who() << " ---" << endl;
     while((times-- > 0) && enemy->isAlive() && this->isAlive()) {
         do_dmg(enemy);
@@ -55,6 +57,7 @@ int Hero::do_dmg(class Monster* enemy)
             cout << enemy->who() << " was killed" << endl;
             cout << who() << " earned " << enemy->kill_exp << " exp" << endl;
             accept_exp(enemy);
+            accept_gold(enemy);
         }
         else if (dmg == 0)
             cout << enemy->who() << " dodged an attack" << endl;
@@ -113,6 +116,11 @@ void Hero::accept_exp(class Monster* enemy)
 
 
 
+void Hero::accept_gold(class Monster* enemy) {
+    gold += enemy->kill_gold;
+}
+
+
 
 void Hero::print_stats()
 {
@@ -165,6 +173,7 @@ void Hero::level_up()
     levelup_experience = level*levelup_exp_modifier;
     cout << who() <<  " is now level " << level << endl;
 }
+
 
 
 
@@ -245,7 +254,9 @@ void Monster::print_stats()
     cout << " Damage: " << damage_min << " - " << damage_max << endl;
     cout << " Defence: " << defence << endl;
     cout << " Dodge: " << miss_chance << "%" << endl;
-    cout << " Kill Exp: " << kill_exp << endl << endl;
+    cout << " Kill Exp: " << kill_exp << endl;
+    cout << " Kill Gold: " << kill_gold << endl << endl;
+
 }
 
 
