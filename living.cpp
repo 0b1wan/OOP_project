@@ -10,8 +10,10 @@
 
 int Hero::do_dmg(class Monster* enemy)
 {
-
     // Do damage to monster
+    if (!enemy->isAlive() || !this->isAlive())
+        return -1;
+
     if (enemy->accept_dmg(this->strenght /* + weapon strength */) == -1)
     {
         cout << enemy->monster_type << "(" << enemy->name << ") was killed" << endl;
@@ -19,28 +21,32 @@ int Hero::do_dmg(class Monster* enemy)
         accept_exp(enemy);
         
     }
-    // accept damage from monster
-    if (accept_dmg(enemy) == -1)
-    {
-        cout << hero_type << "(" << name << ") was killed by a " << enemy->monster_type << endl;
-    }
-    else
-    {
-        cout << hero_type << "(" << name << ") took some damage" << endl;
-    }
 
+    // Accept damage from monster
+    if (!enemy->isAlive() || !this->isAlive())
+        return -1;
+
+    int dmg = accept_dmg(enemy);
+    if (dmg == -1)
+        cout << hero_type << "(" << name << ") was killed by a " << enemy->monster_type << endl;
+    else if (dmg == 0)
+        cout << "Attack to " << name << " dodged" << endl;
+
+    else
+        cout << hero_type << "(" << name << ") took " << dmg << " damage" << endl;
 
     return 0;
 }
 
 void Monster::do_dmg(class Hero* enemy)
 {
-
-
 }
 
 int Hero::accept_dmg(class Monster* enemy)
 {
+    if (health <= 0)
+        return -1;
+    // Dodge increases as agility increases, maximum dodge chance is 90%
     int dodge = rand() % 100 + 1;
     int chance = 0.01*agility*agility;
     if (chance > 90)
@@ -49,23 +55,21 @@ int Hero::accept_dmg(class Monster* enemy)
         dodge = (dodge <= chance);
 
     if (dodge)
-    {
-        cout << "Attack to " << name << " dodged" << endl;
-    }
+        return 0;
     else
     {
+
         int damage = rand() % (enemy->damage_max - enemy->damage_min) + enemy->damage_min;
         health -= damage;
-        if (health <= 0)
+        if (!isAlive())
             return -1;
         return damage;
     }
-    return 0;
 }
 
 void Hero::attack(class Monster* enemy, int times)
 {
-    while((times-- > 0) && (enemy->health > 0)) {
+    while((times-- > 0) && enemy->isAlive() && this->isAlive()) {
         do_dmg(enemy);
         enemy->do_dmg(this);
     }
@@ -74,11 +78,13 @@ void Hero::attack(class Monster* enemy, int times)
 
 int Monster::accept_dmg(int amnt)
 {
+    if (!isAlive())
+        return -1;
     int actual = amnt - defence;
     if (actual > 0)
         this->health -= actual;
 
-    if (health <= 0) {
+    if (!isAlive()) {
         return -1;
     }
     return actual;
@@ -115,13 +121,18 @@ void Hero::print_stats()
 {
     cout << endl;
     if (hero_type == "Warrior")
-        cout << "--- Statistics for Warrior: " << name << endl;
+        cout << "--- Statistics for Warrior: " << name;
 
     else if (hero_type == "Sorcerer")
-        cout << "--- Statistics for Sorcerer: " << name << endl;
+        cout << "--- Statistics for Sorcerer: " << name;
 
     else
-        cout << "--- Statistics for Paladin: " << name << endl;
+        cout << "--- Statistics for Paladin: " << name;
+
+    if (!isAlive())
+        cout << " (Dead)" << endl;
+    else
+    cout << endl;
 
     cout << " Level: " << level << endl;
     cout << " Health: " << health << "/" << max_health
@@ -142,26 +153,35 @@ void Monster::print_stats()
 {
     cout << endl;
     if (monster_type == "Dragon")
-        cout << "--- Statistics for Dragon: " << name << endl;
+        cout << "--- Statistics for Dragon: " << name ;
 
     else if (monster_type == "Exosceleton")
-        cout << "--- Statistics for Exosceleton: " << name << endl;
+        cout << "--- Statistics for Exosceleton: " << name;
 
     else
-        cout << "--- Statistics for Spirit: " << name << endl;
+        cout << "--- Statistics for Spirit: " << name;
 
+    if (!isAlive())
+        cout << " (Dead)" << endl;
+    else
+        cout << endl;
     cout << " Level: " << level << endl;
     cout << " Health: " << health << "/" << max_health << endl;
     cout << " Damage: " << damage_min << " - " << damage_max << endl;
     cout << " Defence: " << defence << endl;
-    cout << " Miss Chance: " << miss_chance << endl;
+    cout << " Dodge: " << miss_chance << "%" << endl;
     cout << " Kill Exp: " << kill_exp << endl << endl;
 
 }
 
-bool Living::alive()
+bool Living::isAlive()
 {
     return (health > 0);
 }
+
+void Living::ressurect() { 
+    health = max_health;
+}
+
 
 

@@ -27,10 +27,11 @@ public:
     string name;
 
     int level;
+    const int max_level;
     int health;
     int max_health;
 
-    Living(string nm, int lv , int hlth)
+    Living(string nm, int lv , int hlth) : max_level(21)
     {
         name = nm;
         level = lv;
@@ -42,7 +43,8 @@ public:
     { }
 
     virtual void print_stats() =0;
-    bool alive();
+    bool isAlive();
+    void ressurect();
 };
 
 
