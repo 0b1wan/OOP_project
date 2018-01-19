@@ -43,6 +43,8 @@ public:
     { }
 
     virtual void print_stats() =0;
+    virtual string who() =0;
+
     bool isAlive();
     void ressurect();
 };
@@ -101,9 +103,12 @@ public:
     void accept_exp(class Monster*);
     void attack(class Monster*, int times=999999);
 
-    // Helper functions
     virtual void level_up();
+
+    // Helper functions
+    int get_dodge_chance();
     void print_stats();
+    string who();
 };
 
 
@@ -117,16 +122,10 @@ public:
             int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Warrior";
-#ifdef _DEBUG
-        cout << "Just constructed a Warrior" << endl;
-#endif
     }
 
     ~Warrior()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed a Warrior" << endl;
-#endif
     }
 
     void level_up();
@@ -139,23 +138,18 @@ public:
 class Sorcerer : public Hero
 {
 public:
-    Sorcerer(string nm="Clever Sorcerer", int lv=1,int hlth=100, int man=100, int str=30, int dex=20, int ag=20, int mon=1000,
+    Sorcerer(string nm="Clever Sorcerer", int lv=1,int hlth=100, int man=100, int str=30, int dex=30, int ag=20, int mon=1000,
              int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Sorcerer";
 
-#ifdef _DEBUG
-        cout << "Just constructed a Sorcerer" << endl;
-#endif
     }
 
     ~Sorcerer()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed a Sorcerer" << endl;
-#endif
     }
 
+    void level_up();
 };
 
 
@@ -165,21 +159,17 @@ public:
 class Paladin : public Hero
 {
 public:
-    Paladin(string nm="Fierce Paladin", int lv=1,int hlth=100, int man=100, int str=50, int dex=20, int ag=10, int mon=1000,
+    Paladin(string nm="Fierce Paladin", int lv=1,int hlth=100, int man=100, int str=50, int dex=30, int ag=10, int mon=1000,
             int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Paladin";
-#ifdef _DEBUG
-        cout << "Just constructed a Paladin" << endl;
-#endif
     }
 
     ~Paladin()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed a Paladin" << endl;
-#endif
     }
+
+    void level_up();
 };
 
 
@@ -216,6 +206,7 @@ public:
     int accept_dmg(int amount);
     void do_dmg(Hero*);
     void print_stats();
+    string who();
 };
 
 
@@ -228,16 +219,10 @@ public:
     Dragon(string nm="White Dragon", int lvl=1, int hlth=50, int dmin=10, int dmax=15, int def=10, int miss=10) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
         monster_type = "Dragon";
-#ifdef _DEBUG
-        cout << "Just constructed a Dragon" << endl;
-#endif
     }
 
     ~Dragon()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed a Dragon" << endl;
-#endif
     }
 
 };
@@ -252,16 +237,10 @@ public:
     Exosceleton(string nm="Crispy Exo", int lvl=1, int hlth=50, int dmin=5, int dmax=10, int def=30, int miss=10) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
         monster_type = "Exosceleton";
-#ifdef _DEBUG
-        cout << "Just constructed an Exosceleton" << endl;
-#endif
     }
 
     ~Exosceleton()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed an Exosceleton" << endl;
-#endif
     }
 
 };
@@ -276,16 +255,10 @@ public:
     Spirit(string nm="Semi-Visible Spirit", int lvl=1, int hlth=50, int dmin=5, int dmax=10, int def=10, int miss=40) : Monster(nm, lvl,hlth,dmin,dmax,def,miss)
     {
         monster_type = "Spirit";
-#ifdef _DEBUG
-        cout << "Just constructed a Spirit" << endl;
-#endif
     }
 
     ~Spirit()
     {
-#ifdef _DEBUG
-        cout << "Just destroyed a Spirit" << endl;
-#endif
     }
 
 };

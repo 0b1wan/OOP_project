@@ -8,38 +8,74 @@
 
 #include "living.hpp"
 
-int Hero::do_dmg(class Monster* enemy)
+/**************************** LIVING FUNCTIONS ****************************/
+/**************************************************************************/
+
+bool Living::isAlive()
 {
-    // Do damage to monster
-    if (!enemy->isAlive() || !this->isAlive())
-        return -1;
-
-    if (enemy->accept_dmg(this->strenght /* + weapon strength */) == -1)
-    {
-        cout << enemy->monster_type << "(" << enemy->name << ") was killed" << endl;
-        cout << name << " earned " << enemy->kill_exp << " exp" << endl;
-        accept_exp(enemy);
-        
-    }
-
-    // Accept damage from monster
-    if (!enemy->isAlive() || !this->isAlive())
-        return -1;
-
-    int dmg = accept_dmg(enemy);
-    if (dmg == -1)
-        cout << hero_type << "(" << name << ") was killed by a " << enemy->monster_type << endl;
-    else if (dmg == 0)
-        cout << "Attack to " << name << " dodged" << endl;
-
-    else
-        cout << hero_type << "(" << name << ") took " << dmg << " damage" << endl;
-
-    return 0;
+    return (health > 0);
 }
 
-void Monster::do_dmg(class Hero* enemy)
+
+
+void Living::ressurect() {
+    health = max_health;
+}
+
+
+
+/**************************** HERO FUNCTIONS ****************************/
+/************************************************************************/
+
+void Hero::attack(class Monster* enemy, int times)
 {
+    cout << " --- FIGHT: " << who() << " vs " << enemy->who() << " ---" << endl;
+    while((times-- > 0) && enemy->isAlive() && this->isAlive()) {
+        do_dmg(enemy);
+        enemy->do_dmg(this);
+    }
+    if (isAlive())
+        cout << " --- WINNER: " << who() << " ---"  << endl << endl;
+    else
+        cout << " --- WINNER: " << enemy->who() << " ---" << endl << endl;
+}
+
+
+
+int Hero::do_dmg(class Monster* enemy)
+{
+    if (!enemy->isAlive() || !this->isAlive())
+        return -1;
+
+    // Do damage to monster
+    {
+        int dmg = enemy->accept_dmg(this->strenght /* + weapon strength */);
+        if (dmg == -1)
+        {
+            cout << enemy->who() << " was killed" << endl;
+            cout << who() << " earned " << enemy->kill_exp << " exp" << endl;
+            accept_exp(enemy);
+        }
+        else if (dmg == 0)
+            cout << enemy->who() << " dodged an attack" << endl;
+        else
+            cout << who() << " -> " << enemy->who() << " " << dmg << " damage" << endl;
+    }
+
+    if (!enemy->isAlive() || !this->isAlive())
+        return -1;
+
+    // Accept damage from monster
+    {
+        int dmg = accept_dmg(enemy);
+        if (dmg == -1)
+            cout << who() << " was killed by a " << enemy->monster_type << endl;
+        else if (dmg == 0)
+            cout << who() << " dodged an attack" << endl;
+        else
+            cout << enemy->who() << " -> " << who() << " " << dmg << " damage" << endl;
+    }
+    return 0;
 }
 
 int Hero::accept_dmg(class Monster* enemy)
@@ -48,17 +84,13 @@ int Hero::accept_dmg(class Monster* enemy)
         return -1;
     // Dodge increases as agility increases, maximum dodge chance is 90%
     int dodge = rand() % 100 + 1;
-    int chance = 0.01*agility*agility;
-    if (chance > 90)
-        dodge = (dodge <= 90);
-    else
-        dodge = (dodge <= chance);
+    int chance = get_dodge_chance();
+    dodge = (dodge <= chance);
 
     if (dodge)
         return 0;
     else
     {
-
         int damage = rand() % (enemy->damage_max - enemy->damage_min) + enemy->damage_min;
         health -= damage;
         if (!isAlive())
@@ -67,28 +99,7 @@ int Hero::accept_dmg(class Monster* enemy)
     }
 }
 
-void Hero::attack(class Monster* enemy, int times)
-{
-    while((times-- > 0) && enemy->isAlive() && this->isAlive()) {
-        do_dmg(enemy);
-        enemy->do_dmg(this);
-    }
-}
 
-
-int Monster::accept_dmg(int amnt)
-{
-    if (!isAlive())
-        return -1;
-    int actual = amnt - defence;
-    if (actual > 0)
-        this->health -= actual;
-
-    if (!isAlive()) {
-        return -1;
-    }
-    return actual;
-}
 
 void Hero::accept_exp(class Monster* enemy)
 {
@@ -100,22 +111,8 @@ void Hero::accept_exp(class Monster* enemy)
     }
 }
 
-void Hero::level_up()
-{
-    level += 1;
-    levelup_experience = level*levelup_exp_modifier;
-    cout << hero_type << "(" << name <<  ") is now level " << level << endl;
-}
 
-void Warrior::level_up()
-{
-    max_health += 100;
-    health = max_health;
-    strenght += 15;
-    dexterity += 10;
-    agility += 15;
-    Hero::level_up();
-}
+
 
 void Hero::print_stats()
 {
@@ -132,7 +129,7 @@ void Hero::print_stats()
     if (!isAlive())
         cout << " (Dead)" << endl;
     else
-    cout << endl;
+        cout << endl;
 
     cout << " Level: " << level << endl;
     cout << " Health: " << health << "/" << max_health
@@ -145,9 +142,87 @@ void Hero::print_stats()
     cout << " Gold: " << gold << endl;
     cout << " Strength: " << strenght << endl;
     cout << " Dexterity: " << dexterity << endl;
-    cout << " Agility: " << agility << endl << endl;
-
+    cout << " Agility: " << agility << " (" << get_dodge_chance() << "%)" << endl << endl;
 }
+
+string Hero::who() {
+    return hero_type + "(" + name + ")";
+}
+
+int Hero::get_dodge_chance() {
+    int chance = 0.01*agility*agility;
+    if (chance > 90)
+        return 90;
+    else
+        return chance;
+}
+
+
+
+void Hero::level_up()
+{
+    level += 1;
+    levelup_experience = level*levelup_exp_modifier;
+    cout << who() <<  " is now level " << level << endl;
+}
+
+
+
+void Warrior::level_up()
+{
+    max_health += 100;
+    health = max_health;
+    strenght += 20;
+    dexterity += 10;
+    agility += 15;
+    Hero::level_up();
+}
+
+void Sorcerer::level_up()
+{
+    max_health += 100;
+    health = max_health;
+    strenght += 10;
+    dexterity += 15;
+    agility += 15;
+    Hero::level_up();
+}
+
+void Paladin::level_up()
+{
+    max_health += 100;
+    health = max_health;
+    strenght += 20;
+    dexterity += 15;
+    agility += 10;
+    Hero::level_up();
+}
+
+
+/**************************** MONSTER FUNCTIONS ****************************/
+/***************************************************************************/
+
+
+
+void Monster::do_dmg(class Hero* enemy)
+{}
+
+int Monster::accept_dmg(int amnt)
+{
+    if (!isAlive())
+        return -1;
+    int actual = amnt - defence;
+    if (actual > 0)
+        this->health -= actual;
+
+    if (!isAlive()) {
+        return -1;
+    }
+    return actual;
+}
+
+
+
 
 void Monster::print_stats()
 {
@@ -171,17 +246,9 @@ void Monster::print_stats()
     cout << " Defence: " << defence << endl;
     cout << " Dodge: " << miss_chance << "%" << endl;
     cout << " Kill Exp: " << kill_exp << endl << endl;
-
-}
-
-bool Living::isAlive()
-{
-    return (health > 0);
-}
-
-void Living::ressurect() { 
-    health = max_health;
 }
 
 
-
+string Monster::who() {
+    return monster_type + "(" + name + ")";
+}

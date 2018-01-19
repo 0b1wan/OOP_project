@@ -25,6 +25,9 @@ int main(int argc, const char * argv[]) {
     Dragon drago("Black Eye", 21);
 
     BraveWarrior.print_stats();
+    QuietSpirit.print_stats();
+    WhiteDragon.print_stats();
+    exo.print_stats();
 
     BraveWarrior.attack(&WhiteDragon);
     BraveWarrior.attack(&QuietSpirit);
