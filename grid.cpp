@@ -1,48 +1,46 @@
 #include "block.cpp"
+#include "grid.hpp"
 
-class Grid
+
+
+Grid::Grid(int c, int r)
 {
-    private:
-        Block *** blockarray;
-        int columns;
-        int rows;
-    public:
-        Grid(int c, int r) : columns(c), rows(r)
+    columns = c;
+    rows = r;
+
+    Blocks=new Block**[rows];
+    for (int i=0; i<rows; i++)
+    {
+        Blocks[i]=new Block*[columns];
+    }
+    //read from GRID FILE columns*rows blocks (their properties), create the block objects in the heap and pass their addresses in the array
+    for (int i=0; i<columns; i++)
+    {
+        for (int j=0; j<rows; j++)
         {
-            blockarray=new Block**[rows];
-            for (int i=0; i<rows; i++)
-            {
-                blockarray[i]=new Block*[columns];
-            }
-            //read from GRID FILE columns*rows blocks (their properties), create the block objects in the heap and pass their addresses in the array
-            for (int i=0; i<columns; i++)
-            {
-                for (int j=0; j<rows; j++)
-                {
-                    //read the GRID FILE and use "new" for each on of them and then pass their addresses to blockarray[i][j]
-                }
-            }
+            //read the GRID FILE and use "new" for each on of them and then pass their addresses to blockarray[i][j]
         }
-        ~Grid()
+    }
+
+}
+
+Grid::~Grid()
+{
+
+    //deallocate the array in heap
+    for (int i=0; i<columns; i++)
+    {
+        for (int j=0; j<rows; j++)
         {
-            //deallocate the array in heap
-            for (int i=0; i<columns; i++)
-            {
-                for (int j=0; j<rows; j++)
-                {
-                    delete blockarray[i][j]; //delete the blocks
-                }
-            }
-            
-            for (int i=0; i<rows; i++)
-            {
-                delete[] blockarray[i]; //delete all the rows
-            }
-            
-            delete[] blockarray;
+            delete Blocks[i][j]; //delete the blocks
         }
-        void displaymap()
-        {
-            
-        }
-};
+    }
+
+    for (int i=0; i<rows; i++)
+    {
+        delete[] Blocks[i]; //delete all the rows
+    }
+
+    delete[] Blocks;
+
+}

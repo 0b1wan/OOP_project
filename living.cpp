@@ -250,7 +250,7 @@ void Monster::print_stats()
     else
         cout << endl;
     cout << " Level: " << level << endl;
-    cout << " Health: " << health << "/" << max_health << endl;
+    cout << " Health: " << health << "/" << max_health << " (" << (int)(((float)health/max_health)*100) << "%)" << endl;
     cout << " Damage: " << damage_min << " - " << damage_max << endl;
     cout << " Defence: " << defence << endl;
     cout << " Dodge: " << miss_chance << "%" << endl;

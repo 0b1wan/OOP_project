@@ -11,34 +11,25 @@
 #include <iostream>
 #include "living.hpp"
 #include "item.cpp"
-
+#include "game.hpp"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
     srand(((unsigned int)time(NULL)));
 
-    Warrior BraveWarrior("Jessy", 1);
-    Spirit QuietSpirit("Little Bitch");
-    Dragon WhiteDragon("Some Mofo");
-    Exosceleton exo("Mike");
-    Dragon drago("Black Eye", 21);
+    class Game* mygame = new Game(10,10);
 
-    BraveWarrior.print_stats();
-    QuietSpirit.print_stats();
-    WhiteDragon.print_stats();
-    exo.print_stats();
+    mygame->add_Hero_Warrior(0,0);
+    mygame->add_Hero_Sorcerer(0,0);
+    mygame->add_Hero_Paladin(0,0);
 
-    BraveWarrior.attack(&WhiteDragon);
-    BraveWarrior.attack(&QuietSpirit);
-    BraveWarrior.attack(&exo);
+    mygame->add_Monster_Dragon(10, 10);
 
-    BraveWarrior.print_stats();
-    drago.print_stats();
+    mygame->theHeros[0]->attack(mygame->theMonsters[0]);
+    mygame->theHeros[0]->print_stats();
+    mygame->theMonsters[0]->print_stats();
 
-    BraveWarrior.attack(&drago);
-
-    BraveWarrior.print_stats();
 
     return 0;
 }

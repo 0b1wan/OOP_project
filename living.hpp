@@ -119,8 +119,7 @@ public:
 class Warrior : public Hero
 {
 public:
-    Warrior(string nm="Brave Warrior", int lv=1,int hlth=100, int man=100, int str=50, int dex=30, int ag=20, int mon=1000,
-            int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
+    Warrior(string nm="Brave Warrior", int lv=1,int hlth=100, int man=100, int str=50, int dex=30, int ag=20, int mon=1000, int exp=0) : Hero(nm, lv, hlth, man, str, dex, ag, mon, exp)
     {
         hero_type = "Warrior";
     }
