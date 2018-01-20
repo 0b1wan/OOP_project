@@ -27,8 +27,9 @@ public:
     Grid(int, int);
     ~Grid();
 
-    void displaymap();
+    void displayMap();
 
+    void displayBlock(int, int);
 };
 
 

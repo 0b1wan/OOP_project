@@ -43,3 +43,19 @@ Grid::~Grid()
     delete[] Blocks;
 
 }
+
+void Grid::displayBlock(int x, int y) {
+
+    for(int i=0; i<3; i++) {
+        cout << "
+    }
+
+}
+
+void Grid::displayMap() {
+
+
+
+
+
+}

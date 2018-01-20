@@ -32,12 +32,13 @@ public:
     ~Block() {} ;
 
     bool empty();
-
+    int heroCount();
 };
 
 class Common : public Block
 {
 public:
+
     Common(int x, int y) : Block(x, y) {
         block_type = "Common";
     }
