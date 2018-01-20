@@ -10,16 +10,20 @@
 #define grid_h
 
 #include "block.hpp"
-
+#include "grid.hpp"
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include "living.hpp"
 
 class Grid
 {
-private:
+public:
     class Block *** Blocks;
     int columns;
     int rows;
 
-public:
     Grid(int, int);
     ~Grid();
 

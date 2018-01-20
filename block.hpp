@@ -8,29 +8,60 @@
 
 #ifndef block_h
 #define block_h
+#include <iostream>
+#include <string>
+#include <vector>
+#include "grid.hpp"
+#include "living.hpp"
 
 using namespace std;
 
 class Block
 {
-private:
-    string condition;
-    bool contains;
 public:
-    Block(string a, bool b) : condition(a), contains(b)
-    {
-        cout << "Just constructed a Block" << endl;
+
+    string block_type;
+    int x_coord;
+    int y_coord;
+    vector<class Hero*> heros;
+
+    Block(int x, int y) {
+        x_coord = x;
+        y_coord = y;
+    };
+    ~Block() {} ;
+
+    bool empty();
+
+};
+
+class Common : public Block
+{
+public:
+    Common(int x, int y) : Block(x, y) {
+        block_type = "Common";
     }
-    ~Block()
-    {
-        cout << "Just destroyed a Block" << endl;
+
+};
+
+
+class Market : public Block
+{
+public:
+    Market(int x, int y) : Block(x, y) {
+        block_type = "Market";
     }
-    string get_condition() const{
-        return condition;
+
+
+};
+
+class NonAccessible : public Block
+{
+public:
+    NonAccessible(int x, int y) : Block(x, y) {
+        block_type = "Non Accessible";
     }
-    bool get_contains() const{
-        return contains;
-    }
+
 };
 
 #endif /* block_h */

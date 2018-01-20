@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
     mygame->add_Hero_Sorcerer(0,0);
     mygame->add_Hero_Paladin(0,0);
 
-    mygame->add_Monster_Dragon(10, 10);
+    mygame->add_Monster_Dragon(3, 3);
 
     mygame->theHeros[0]->attack(mygame->theMonsters[0]);
     mygame->theHeros[0]->print_stats();

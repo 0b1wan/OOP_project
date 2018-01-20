@@ -16,7 +16,10 @@ Game::Game(int x, int y)
     theGrid = new class Grid(x, y);
 }
 
-/********** ADD HERO **********/
+/********** ADD HEROS **********/
+
+
+
 int Game::add_Hero_Warrior(int x, int y,string nm, int lv, int hlth, int man, int str, int dex, int ag, int mon, int exp)
 {
     if (total_Heros == 3)
@@ -26,6 +29,7 @@ int Game::add_Hero_Warrior(int x, int y,string nm, int lv, int hlth, int man, in
     }
     class Warrior* mywarrior = new class Warrior(nm,lv,hlth,man,str,dex,ag,mon,exp);
     theHeros.push_back(mywarrior);
+    theGrid->Blocks[x][y]->heros.push_back(mywarrior);
     total_Heros++;
     return 0;
 }
@@ -40,6 +44,7 @@ int Game::add_Hero_Paladin(int x, int y,string nm, int lv, int hlth, int man, in
     }
     class Paladin* mypaladin = new class Paladin(nm,lv,hlth,man,str,dex,ag,mon,exp);
     theHeros.push_back(mypaladin);
+    theGrid->Blocks[x][y]->heros.push_back(mypaladin);
     total_Heros++;
     return 0;
 }
@@ -54,11 +59,16 @@ int Game::add_Hero_Sorcerer(int x, int y,string nm, int lv, int hlth, int man, i
     }
     class Sorcerer* mysorcerer = new class Sorcerer(nm,lv,hlth,man,str,dex,ag,mon,exp);
     theHeros.push_back(mysorcerer);
+    theGrid->Blocks[x][y]->heros.push_back(mysorcerer);
     total_Heros++;
     return 0;
 }
 
-/********** ADD MONSTER **********/
+
+
+
+
+/********** ADD MONSTERS **********/
 
 
 

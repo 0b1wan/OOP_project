@@ -13,8 +13,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <math.h>
-#include <random>
 #include "grid.hpp"
 #include "living.hpp"
 #include "block.hpp"
@@ -26,7 +24,6 @@ public:
     int grid_x;
     int grid_y;
     int total_Heros;
-
 
 
     class Grid* theGrid;
@@ -50,6 +47,10 @@ public:
     int add_Monster_Spirit(int x, int y, string nm="The 13th God", int lvl=1, int hlth=50, int dmin=10,int dmax=15, int def=10, int miss=10);
 
     int add_Monster_Exosceleton(int x, int y, string nm="Bone Cracker", int lvl=1, int hlth=50, int dmin=10, int dmax=15, int def=10, int miss=10);
+
+    // New Blocks
+    int add_Block_Market(int x, int y);
+    int add_Block_NonAccessible(int x, int y);
 };
 
 

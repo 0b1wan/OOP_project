@@ -1,6 +1,4 @@
-#include "block.cpp"
 #include "grid.hpp"
-
 
 
 Grid::Grid(int c, int r)
@@ -19,6 +17,7 @@ Grid::Grid(int c, int r)
         for (int j=0; j<rows; j++)
         {
             //read the GRID FILE and use "new" for each on of them and then pass their addresses to blockarray[i][j]
+            Blocks[i][j] = new class Common(i,j);
         }
     }
 

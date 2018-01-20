@@ -1,4 +1,5 @@
-#include <iostream>
-#include <string>
+#include "block.hpp"
 
-
+bool Block::empty() {
+    return heros.empty();
+}
