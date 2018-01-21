@@ -21,48 +21,45 @@ class Block
 public:
 
     string block_type;
-    int x_coord;
-    int y_coord;
+    int row;
+    int column;
+
     vector<class Hero*> heros;
 
-    Block(int x, int y) {
-        x_coord = x;
-        y_coord = y;
+
+    Block(int r, int c) {
+        row = r;
+        column = c;
     };
     ~Block() {} ;
 
-    bool empty();
-    int heroCount();
+    bool hasHeros();
 };
 
 class Common : public Block
 {
 public:
 
-    Common(int x, int y) : Block(x, y) {
+    Common(int r, int c) : Block(r, c) {
         block_type = "Common";
     }
-
 };
 
 
 class Market : public Block
 {
 public:
-    Market(int x, int y) : Block(x, y) {
+    Market(int r, int c) : Block(r, c) {
         block_type = "Market";
     }
-
-
 };
 
 class NonAccessible : public Block
 {
 public:
-    NonAccessible(int x, int y) : Block(x, y) {
-        block_type = "Non Accessible";
+    NonAccessible(int r, int c) : Block(r, c) {
+        block_type = "NonAccessible";
     }
-
 };
 
 #endif /* block_h */

@@ -1,9 +1,6 @@
 #include "block.hpp"
 
-bool Block::empty() {
-    return heros.empty();
-}
-
-int Block::heroCount() {
+bool Block::hasHeros()
+{
     return heros.size();
 }

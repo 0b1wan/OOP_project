@@ -58,6 +58,9 @@ class Hero : public Living
 
 public:
 
+    int r_co;
+    int c_co;
+
     int mana;
     int max_mana;
 
