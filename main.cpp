@@ -20,29 +20,7 @@ int main(int argc, const char * argv[]) {
 
     class Game* mygame = new Game(5, 5);
 
-    mygame->add_Hero_Warrior(0,0, "Jesus", 5);
-    mygame->add_Hero_Sorcerer(0,0);
-    mygame->add_Hero_Paladin(0,0);
+    mygame->begin();
 
-    mygame->add_Monster_Dragon(3, 3, "Josh" , 5);
-    mygame->theGrid->add_Market(1, 1);
-    mygame->theGrid->add_Market(4, 3);
-    mygame->theGrid->add_Market(3, 4);
-
-
-    mygame->theGrid->add_NonAccessible(4, 4);
-
-    mygame->theHeros[0]->attack(mygame->theMonsters[0]);
-    mygame->theHeros[0]->print_stats();
-    mygame->theMonsters[0]->print_stats();
-
-
-
-    mygame->move_heros("left");
-
-
-    mygame->theGrid->showMap();
-
-    cout << endl;
     return 0;
 }

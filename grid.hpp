@@ -27,7 +27,7 @@ public:
     int lines;
     vector<string> text;
 
-    Textbox(vector<string>, string);
+    Textbox(vector<string>, string srt = "Default");
 };
 
 class Map
@@ -35,7 +35,7 @@ class Map
 public:
     int r_elements;
     int c_elements;
-    vector<vector<class Textbox*>> blocks;
+    vector<vector<class Textbox*>> textbox;
 
     void add_textbox(class Textbox*, int charLimit = -1, bool newline = false);
     void show();
@@ -49,9 +49,15 @@ public:
     class Textbox* EmptyBlock;
     class Textbox* MarketBlock;
     class Textbox* NonAccessibleBlock;
+    class Textbox* Space;
+    class Textbox* TripleSpace;
+    class Textbox* Newline;
 
-    // Basic Visual Blocks
+
+    // Basic Visual square
     Map() {
+        r_elements = 0;
+        c_elements =0;
         HorizontalBlock1 =  new Textbox({"+------"}, "Build");
         HorizontalBlock2 =  new Textbox({"-------"}, "Build");
         HorizontalBlock3 =  new Textbox({"-------+"}, "Build");
@@ -61,6 +67,10 @@ public:
         EmptyBlock =        new Textbox({"      ", "      ", "      "}, "Common");
         MarketBlock =       new Textbox({"      ", "Market", "      "}, "Market");
         NonAccessibleBlock =new Textbox({"XXXXXX", "XXXXXX", "XXXXXX"}, "NonAccessible");
+        Space =             new Textbox({" "}, "Space");
+        TripleSpace =       new Textbox({" ", " ", " "}, "Space");
+        Newline =           new Textbox({"\n"}, "Newline");
+
     }
 
     class Textbox* HerosBlock(vector<class Hero*>);
@@ -74,7 +84,7 @@ private:
     int updateVisualMap();
 
 public:
-    class Block *** Blocks;
+    class Block *** square;
     class Map* theMap;
     int columns;
     int rows;
@@ -85,7 +95,7 @@ public:
     void showMap();
 
 
-    // New Blocks
+    // New square
     int add_Market(int, int);
     int add_NonAccessible(int, int);
 
