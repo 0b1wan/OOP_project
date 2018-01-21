@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     srand(((unsigned int)time(NULL)));
 
-    class Game* mygame = new Game(5, 5);
+    class Game* mygame = new Game(5, 10);
 
     mygame->begin();
 

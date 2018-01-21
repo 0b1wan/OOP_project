@@ -38,7 +38,9 @@ void Game::begin()
     cout << " A warrior, a sorcerer and paladin..." << endl;
     cout << " Each type has different attribute advantages as he levels up." << endl << endl;
     cout << " Try to take some action..." << endl;
+
     showPossibleActions();
+
 
 
 }
@@ -212,40 +214,39 @@ void Game::showPossibleActions()
     cout << " |  1. Move team --------> Hotkey: m  |" << endl;
     cout << " |  2. Fight Monster ----> Hotkey: f  |" << endl;
     cout << " |  3. Go to Market -----> Hotkey: b  |" << endl;
-    cout << " |  4. Exit -------------> Hotkey: q  |" << endl;
+    cout << " |  4. Display the Map --> Hotkey: v  |" << endl;
+    cout << " |  5. Exit -------------> Hotkey: q  |" << endl;
     cout << " |                                    |" << endl;
     cout <<" \\------------------------------------/" << endl;
 
-    char input;
+    string input;
     do {
-        cout << "\n  : ";
+        cout << "\n : ";
         cin >> input;
-        if (input != 'm' && input != 'f' && input != 'b' && input != 'q')
+        if (input != "m" && input != "f" && input != "b" && input != "q" && input != "v")
             cout << "  Invalid input. Try one of the 4 hotkeys..." << endl;
         else
             break;
     } while (1);
 
     cout << endl;
-    switch (input) {
-        case 'm':
-            askToMoveHeros();
-            break;
-
-        case 'f':
-            break;
-
-        case 'b':
-            break;
-
-        case 'q':
-            cout << " Thanks for playing!" << endl << endl;
-            cout << " Game terminated." << endl << endl;
-            exit(0);
-
-        default:
-            break;
+    if (input == "m")
+        askToMoveHeros();
+    else if (input == "f")
+        return;
+    else if (input == "b")
+        return;
+    else if (input == "q")
+    {
+        cout << " Thanks for playing!" << endl << endl;
+        cout << " Game terminated." << endl << endl;
+        exit(0);
     }
+    else if (input == "v")
+        theGrid->showMap();
+    else
+        return;
+
     
 }
 
