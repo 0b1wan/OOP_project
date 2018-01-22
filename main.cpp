@@ -22,5 +22,7 @@ int main(int argc, const char * argv[]) {
 
     mygame->begin();
 
+    exit(0);
+
     return 0;
 }

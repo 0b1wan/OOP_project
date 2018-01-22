@@ -51,7 +51,7 @@ public:
     int add_Monster_Exosceleton(int r, int c, string nm="Bone Cracker", int lvl=1, int hlth=50, int dmin=10, int dmax=15, int def=10, int miss=10);
 
     void begin();
-    void showPossibleActions();
+    bool showPossibleActions();
     void askToMoveHeros();
     void move_heros(string direction);
 

@@ -39,8 +39,9 @@ void Game::begin()
     cout << " Each type has different attribute advantages as he levels up." << endl << endl;
     cout << " Try to take some action..." << endl;
 
-    showPossibleActions();
+    while (showPossibleActions()) {
 
+    }
 
 
 }
@@ -205,7 +206,7 @@ void Game::askToMoveHeros()
 
 
 
-void Game::showPossibleActions()
+bool Game::showPossibleActions()
 {
     cout << endl;
     cout << "      What would you like to do?       " << endl;
@@ -233,21 +234,23 @@ void Game::showPossibleActions()
     if (input == "m")
         askToMoveHeros();
     else if (input == "f")
-        return;
+        return true;
     else if (input == "b")
-        return;
+        return true;
     else if (input == "q")
     {
         cout << " Thanks for playing!" << endl << endl;
         cout << " Game terminated." << endl << endl;
-        exit(0);
+        return false;
     }
-    else if (input == "v")
+    else if (input == "v"){
         theGrid->showMap();
+        return true;
+    }
     else
-        return;
+        return true;
 
-    
+    return true;
 }
 
 
