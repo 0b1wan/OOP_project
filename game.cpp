@@ -23,7 +23,7 @@ void Game::begin()
     add_Hero_Sorcerer(0,0);
     add_Hero_Paladin(0,0);
 
-    add_Monster_Dragon(3, 3, "Josh" , 5);
+    add_Monster_Dragon(3, 3, "Josh" , 6);
     theGrid->add_Market(1, 1);
     theGrid->add_Market(4, 3);
     theGrid->add_Market(3, 4);
@@ -204,6 +204,154 @@ void Game::askToMoveHeros()
     
 }
 
+string StringToUpper(string strToConvert)
+{
+    string newstring = "";
+
+    for (int i=0; i<(int)strToConvert.length(); i++) {
+        newstring.append(toupper(strToConvert[i]), i);
+    }
+    return newstring;
+}
+
+void Game::showHerosExpanded()
+{
+    Map mymap;
+    for (auto hero : theHeros) {
+
+        Textbox * t1 = new Textbox({"@------------+-","|  " + hero->hero_type + "  | ","+------------+-","|       Mana | ","|     Health | ","+------------+-","|     Damage | ","|   Strength | ","|  Dexterity | ","|    Agility | ", "+------------+-", "|       Gold | " , "| Experience | " ,"@------------+-", "\n"});
+        mymap.add_textbox(t1, -1, true);
+
+        string mystring;
+        vector<string> myvector;
+
+        mystring.append(hero->name);
+        mystring.append(" | ");
+        mystring.append("LVL " + to_string(hero->level));
+        mystring.append(" | ");
+        mystring.append(to_string(hero->c_co) + ", " + to_string(hero->r_co) + " |");
+
+        int len = (int)mystring.length();
+        mystring.clear();
+
+        for (int i=0; i<len-1; i++)
+            mystring.append("-");
+        mystring.append("@");
+
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(hero->name);
+        mystring.append(" | ");
+        mystring.append("LVL " + to_string(hero->level));
+        mystring.append(" | ");
+        mystring.append(to_string(hero->c_co) + ", " + to_string(hero->r_co) + " |");
+
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        for (int i=0; i<len-1; i++)
+            mystring.append("-");
+        mystring.append("+");
+
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->mana) + "/" + to_string(hero->max_mana) + " : ");
+        mystring.append(to_string((int)(((float)hero->mana/hero->max_mana)*100)) + "%");
+        int spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->health) + "/" + to_string(hero->max_health) + " : ");
+        mystring.append(to_string((int)(((float)hero->health/hero->max_health)*100)) + "%");
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        for (int i=0; i<len-1; i++)
+            mystring.append("-");
+        mystring.append("+");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->strenght /* weapon strenght */));
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->strenght));
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->dexterity));
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->agility) + " : " + to_string(hero->get_dodge_chance()) + "%");
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+
+        for (int i=0; i<len-1; i++)
+            mystring.append("-");
+        mystring.append("+");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->gold));
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        mystring.append(to_string(hero->experience) + "/" + to_string(hero->levelup_experience) + " : " + to_string((int)(((float)hero->experience/hero->levelup_experience)*100)) + "%");
+        spaces = (int)myvector[0].size() - (int)mystring.size();
+        for (int i=0; i<spaces -1; i++)
+            mystring.append(" ");
+        mystring.append("|");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        for (int i=0; i<len-1; i++)
+            mystring.append("-");
+        mystring.append("@");
+        myvector.push_back(mystring);
+        mystring.clear();
+
+        // spaces
+
+
+        mymap.add_textbox(new Textbox(myvector));
+
+    }
+    mymap.show();
+
+}
+
 
 
 bool Game::showPossibleActions()
@@ -213,7 +361,7 @@ bool Game::showPossibleActions()
     cout << " /------------------------------------\\" << endl;
     cout << " |                                    |" << endl;
     cout << " |  1. Move team --------> Hotkey: m  |" << endl;
-    cout << " |  2. Fight Monster ----> Hotkey: f  |" << endl;
+    cout << " |  2. Show Heros -------> Hotkey: h  |" << endl;
     cout << " |  3. Go to Market -----> Hotkey: b  |" << endl;
     cout << " |  4. Display the Map --> Hotkey: v  |" << endl;
     cout << " |  5. Exit -------------> Hotkey: q  |" << endl;
@@ -224,7 +372,7 @@ bool Game::showPossibleActions()
     do {
         cout << "\n : ";
         cin >> input;
-        if (input != "m" && input != "f" && input != "b" && input != "q" && input != "v")
+        if (input != "m" && input != "h" && input != "b" && input != "q" && input != "v")
             cout << "  Invalid input. Try one of the 4 hotkeys..." << endl;
         else
             break;
@@ -233,8 +381,8 @@ bool Game::showPossibleActions()
     cout << endl;
     if (input == "m")
         askToMoveHeros();
-    else if (input == "f")
-        return true;
+    else if (input == "h")
+        showHerosExpanded();
     else if (input == "b")
         return true;
     else if (input == "q")

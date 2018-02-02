@@ -52,6 +52,7 @@ public:
 
     void begin();
     bool showPossibleActions();
+    void showHerosExpanded();
     void askToMoveHeros();
     void move_heros(string direction);
 

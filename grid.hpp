@@ -38,6 +38,7 @@ public:
     vector<vector<class Textbox*>> textbox;
 
     void add_textbox(class Textbox*, int charLimit = -1, bool newline = false);
+    int lineLength(int lineNumber);
     void show();
 
     class Textbox* HorizontalBlock1;

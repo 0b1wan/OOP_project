@@ -140,13 +140,10 @@ void Hero::print_stats()
         cout << endl;
 
     cout << " Level: " << level << endl;
-    cout << " Health: " << health << "/" << max_health
-    << " (" << (int)(((float)health/max_health)*100) << "%)" << endl;
-    cout << " Mana: " << mana << "/" << max_mana
-    << " (" << (int)(((float)mana/max_mana)*100) << "%)" << endl;
+    cout << " Health: " << health << "/" << max_health  << " (" << (int)(((float)health/max_health)*100) << "%)" << endl;
+    cout << " Mana: " << mana << "/" << max_mana << " (" << (int)(((float)mana/max_mana)*100) << "%)" << endl;
     cout << " Damage: " << strenght /* + weapon damage */ << endl;
-    cout << " Experience: " << experience << "/" << levelup_experience
-    << " (" << (int)(((float)experience/levelup_experience)*100) << "%)" << endl;
+    cout << " Experience: " << experience << "/" << levelup_experience  << " (" << (int)(((float)experience/levelup_experience)*100) << "%)" << endl;
     cout << " Gold: " << gold << endl;
     cout << " Strength: " << strenght << endl;
     cout << " Dexterity: " << dexterity << endl;

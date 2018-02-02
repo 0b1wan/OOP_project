@@ -201,26 +201,41 @@ void Map::show()
 void Map::add_textbox(class Textbox* txt, int charLimit, bool newline)
 {
 
-    if (charLimit == -1)
-        charLimit = (int)txt->text[0].size();
+    Textbox * copy = new Textbox(txt->text, txt->box_type);
 
-    for (int i=0; i<txt->lines; i++) {
-        if (txt->text[i].size() > charLimit)
-            txt->text[i].erase(charLimit, txt->text[i].size());
+    if (charLimit == -1)
+        charLimit = (int)copy->text[0].size();
+
+    for (int i=0; i<copy->lines; i++) {
+        if (copy->text[i].size() > charLimit)
+            copy->text[i].erase(charLimit, copy->text[i].size());
     }
     
     if (newline) {
         vector<Textbox*> myvector;
-        myvector.push_back(txt);
+        myvector.push_back(copy);
         textbox.push_back(myvector);
         r_elements++;
     }
     else {
-        textbox[textbox.size()-1].push_back(txt);
+        textbox[textbox.size()-1].push_back(copy);
         c_elements++;
     }
 }
 
+int Map::lineLength(int lineNumber)
+{
+
+    if ( (lineNumber > textbox.size()) || (lineNumber < 0) )
+        return -1;
+
+    int length = 0;
+    for (int i=0; i<textbox[lineNumber].size(); i++) {
+        length += textbox[lineNumber][i]->text[0].length();
+    }
+
+    return length;
+}
 
 Textbox::Textbox(vector<string> txt, string type)
 {
@@ -259,7 +274,6 @@ class Textbox* Map::HerosBlock(vector<class Hero*> heros) {
 
     return myblock;
 }
-
 
 
 
