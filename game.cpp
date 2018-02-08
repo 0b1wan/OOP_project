@@ -39,9 +39,7 @@ void Game::begin()
     cout << " Each type has different attribute advantages as he levels up." << endl << endl;
     cout << " Try to take some action..." << endl;
 
-    while (showPossibleActions()) {
-
-    }
+    while (showPossibleActions()) {}
 
 
 }
