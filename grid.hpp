@@ -53,6 +53,7 @@ public:
     class Textbox* Space;
     class Textbox* TripleSpace;
     class Textbox* Newline;
+    class Textbox* MarketBlockWTHeros;
 
 
     // Basic Visual square
@@ -67,6 +68,7 @@ public:
         VerticalBlock =     new Textbox({"|", "|", "|"}, "Build");
         EmptyBlock =        new Textbox({"      ", "      ", "      "}, "Common");
         MarketBlock =       new Textbox({"      ", "Market", "      "}, "Market");
+        MarketBlockWTHeros =new Textbox({"xHeros", "~~IN~~", "Market"}, "MarketWHeros");
         NonAccessibleBlock =new Textbox({"XXXXXX", "XXXXXX", "XXXXXX"}, "NonAccessible");
         Space =             new Textbox({" "}, "Space");
         TripleSpace =       new Textbox({" ", " ", " "}, "Space");

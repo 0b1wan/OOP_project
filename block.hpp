@@ -26,40 +26,15 @@ public:
 
     vector<class Hero*> heros;
 
-
-    Block(int r, int c) {
+    Block(int r, int c, string type) {
         row = r;
         column = c;
+        block_type = type;
     };
     ~Block() {} ;
 
     bool hasHeros();
 };
 
-class Common : public Block
-{
-public:
-
-    Common(int r, int c) : Block(r, c) {
-        block_type = "Common";
-    }
-};
-
-
-class Market : public Block
-{
-public:
-    Market(int r, int c) : Block(r, c) {
-        block_type = "Market";
-    }
-};
-
-class NonAccessible : public Block
-{
-public:
-    NonAccessible(int r, int c) : Block(r, c) {
-        block_type = "NonAccessible";
-    }
-};
 
 #endif /* block_h */

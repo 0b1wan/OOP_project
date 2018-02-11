@@ -17,7 +17,7 @@ Grid::Grid(int row, int col)
         for (int c=0; c<columns; c++)
         {
 
-            square[r][c] = new class Common(r, c);
+            square[r][c] = new class Block(r, c, "Common");
         }
     }
     theMap = new class Map();
@@ -50,8 +50,15 @@ int Grid::createVisualMap()
             else
                 theMap->add_textbox(theMap->HerosBlock(square[r][0]->heros));
         }
-        else if (square[r][0]->block_type == "Market")
-            theMap->add_textbox(theMap->MarketBlock);
+        else if (square[r][0]->block_type == "Market") {
+            if (!square[r][0]->hasHeros())
+                theMap->add_textbox(theMap->MarketBlock);
+            else {
+                theMap->MarketBlockWTHeros->text[0].replace(0,0, to_string((int)square[r][0]->heros.size()));
+                theMap->add_textbox(theMap->MarketBlockWTHeros);
+            }
+
+        }
         else
             theMap->add_textbox(theMap->NonAccessibleBlock);
 
@@ -64,8 +71,14 @@ int Grid::createVisualMap()
                 else
                     theMap->add_textbox(theMap->HerosBlock(square[r][c]->heros));
             }
-            else if (square[r][c]->block_type == "Market")
-                theMap->add_textbox(theMap->MarketBlock);
+            else if (square[r][c]->block_type == "Market"){
+                if (!square[r][c]->hasHeros())
+                    theMap->add_textbox(theMap->MarketBlock);
+                else {
+                    theMap->MarketBlockWTHeros->text[0].replace(0,1, to_string((int)square[r][c]->heros.size()));
+                    theMap->add_textbox(theMap->MarketBlockWTHeros);
+                }
+            }
             else
                 theMap->add_textbox(theMap->NonAccessibleBlock);
         }
@@ -142,14 +155,14 @@ Grid::~Grid()
 int Grid::add_Market(int x, int y)
 {
     delete square[x][y];
-    square[x][y] = new class Market(x,y);
+    square[x][y] = new class Block(x,y,"Market");
     return 0;
 }
 
 int Grid::add_NonAccessible(int x, int y)
 {
     delete square[x][y];
-    square[x][y] = new class NonAccessible(x,y);
+    square[x][y] = new class Block(x,y,"Non-Accessible");
     return 0;
 }
 
@@ -210,7 +223,8 @@ void Map::add_textbox(class Textbox* txt, int charLimit, bool newline)
         if (copy->text[i].size() > charLimit)
             copy->text[i].erase(charLimit, copy->text[i].size());
     }
-    
+
+
     if (newline) {
         vector<Textbox*> myvector;
         myvector.push_back(copy);
