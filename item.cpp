@@ -3,91 +3,69 @@
 
 using namespace std;
 
-class Item
-{
-    private:
-        const string name;
-        const int price;
-        const int minlevel;
-    public:
-        Item(string a, int b, int c) : name(a), price(b), minlevel(c)
+#include "item.h"
+
+        Item::Item(string a, int b, int c) : name(a), price(b), minlevel(c)
         {
             cout << "Just constructed an Item" << endl;
         }
-        virtual ~Item()
+        Item::~Item()
         {
             cout << "Just destroyed an Item" << endl;
         }
-        string get_name() const{
+        string Item::get_name() const{
             return name;
         }
-        int get_price() const{
+        int Item::get_price() const{
             return price;
         }
-        int get_minlevel() const{
+        int Item::get_minlevel() const{
             return minlevel;
         }
-};
 
-class Weapon : public Item
-{
-    private:
-        const int damage;
-        const bool hand;
-    public:
-        Weapon(string a, int b, int c, int d, bool e) : Item(a,b,c), damage(d), hand(e)
+
+        Weapon::Weapon(string a, int b, int c, int d, bool e) : Item(a,b,c), damage(d), hand(e)
         {
             cout << "Just constructed a Weapon" << endl;
         }
-        ~Weapon()
+        Weapon::~Weapon()
         {
             cout << "Just destroyed a Weapon" << endl;
         }
-        int get_damage(){
+        int Weapon::get_damage(){
             return damage;
         }
-        bool get_hand(){
+        bool Weapon::get_hand(){
             return hand;
         }
-};
 
-class Armor : public Item
-{
-    private:
-        const int reduction;
-    public:
-        Armor(string a, int b, int c, int d) : Item(a,b,c), reduction(d)
+
+
+        Armor::Armor(string a, int b, int c, int d) : Item(a,b,c), reduction(d)
         {
             cout << "Just constructed an Armor" << endl;
         }
-        ~Armor()
+        Armor::~Armor()
         {
             cout << "Just destroyed an Armor" << endl;
         }
-        int get_reduction(){
+        int Armor::get_reduction(){
             return reduction;
         }
-        
-};
 
-class Potion : public Item
-{
-    private:
-        string ability;
-        int increasement;
-    public:
-        Potion(string a, int b, int c, string d, int e) : Item(a,b,c), ability(d), increasement(e)
+
+
+        Potion::Potion(string a, int b, int c, string d, int e) : Item(a,b,c), ability(d), increasement(e)
         {
             cout << "Just constructed a Potion" << endl;
         }
-        ~Potion()
+        Potion::~Potion()
         {
             cout << "Just destroyed a Potion" << endl;
         }
-        string get_ability(){
+        string Potion::get_ability(){
             return ability;
         }
-        int get_increasement(){
+        int Potion::get_increasement(){
             return increasement;
         }
-};
