@@ -55,7 +55,9 @@ public:
     void showHerosExpanded();
     void askToMoveHeros();
     void move_heros(string direction);
+    void surprise(vector<Hero*>);
 
+    class Monster* randMonster(Hero *);
 };
 
 

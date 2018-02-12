@@ -29,6 +29,9 @@ void Game::begin()
     theGrid->add_Market(3, 4);
     theGrid->add_NonAccessible(4, 4);
 
+
+    theHeros.front()->attack(theMonsters.front());
+
     cout << " Welcome to the Game! " << endl << endl;
     cout << " This is how the world looks right now... " << endl;
     theGrid->showMap();
@@ -39,9 +42,7 @@ void Game::begin()
     cout << " Each type has different attribute advantages as he levels up." << endl << endl;
     cout << " Try to take some action..." << endl;
 
-    while (showPossibleActions()) {
-
-    }
+    while (showPossibleActions()) {}
 
 
 }
@@ -129,9 +130,45 @@ int Game::add_Monster_Exosceleton(int r, int c, string nm, int lvl, int hlth, in
 }
 
 
+class Monster * Game::randMonster(Hero * thehero) {
+
+    int montype = rand() % 3 + 1;
+    Monster * themonster;
+
+    if (montype == 1)
+        themonster = new Dragon("The HEAT", thehero->level - 2);
+    else if (montype == 2)
+        themonster = new Spirit("See-through", thehero->level - 2);
+    else
+        themonster = new Exosceleton("Thin One", thehero->level - 2);
+
+    return themonster;
+}
+
+void Game::surprise(vector<Hero*> heros) {
+
+    // create random monsters
+    class vector<Monster*> monsters;
+    for (int i=0; i<(rand() % 3 + 1 ); i++) {
+        monsters.push_back(randMonster(heros[i]));
+    }
+
+    // Pick a hero
+    // Pick a monster
+    cout << " Select Hero ";
+
+
+}
+
+
 
 void Game::move_heros(string direction)
 {
+
+    int chance = rand() % 100 + 1;
+    if (chance < 20)
+        surprise(theHeros);
+    
     if ((direction == "up" ) && (theHeros[0]->r_co > 0))
     {
         theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
@@ -219,7 +256,27 @@ void Game::showHerosExpanded()
     Map mymap;
     for (auto hero : theHeros) {
 
-        Textbox * t1 = new Textbox({"@------------+-","|  " + hero->hero_type + "  | ","+------------+-","|       Mana | ","|     Health | ","+------------+-","|     Damage | ","|   Strength | ","|  Dexterity | ","|    Agility | ", "+------------+-", "|       Gold | " , "| Experience | " ,"@------------+-", "\n"});
+        string herotype;
+        if (hero->hero_type == "Sorcerer")
+            herotype.append("|  " + hero->hero_type + "  | ");
+        else
+            herotype.append("|  " + hero->hero_type + "   |");
+
+        Textbox * t1 = new Textbox( {"@------------+-",
+                                      herotype,
+                                     "+------------+-",
+                                     "|       Mana | ",
+                                     "|     Health | ",
+                                     "+------------+-",
+                                     "|     Damage | ",
+                                     "|   Strength | ",
+                                     "|  Dexterity | ",
+                                     "|    Agility | ",
+                                     "+------------+-",
+                                     "|       Gold | ",
+                                     "| Experience | ",
+                                     "@------------+-", "\n"} );
+
         mymap.add_textbox(t1, -1, true);
 
         string mystring;
@@ -341,9 +398,6 @@ void Game::showHerosExpanded()
         mystring.append("@");
         myvector.push_back(mystring);
         mystring.clear();
-
-        // spaces
-
 
         mymap.add_textbox(new Textbox(myvector));
 

@@ -16,15 +16,13 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    srand(((unsigned int)time(NULL)));
 
+    srand(((unsigned int)time(NULL)));
     class Game* mygame = new Game(5, 15);
 
+
+
     mygame->begin();
-
-    mygame->theHeros[0]->print_stats();
     
-    exit(0);
-
     return 0;
 }
