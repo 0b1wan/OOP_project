@@ -1,17 +1,13 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-#include "market.h"
-#include "game.hpp"
-#include "living.hpp"
-#include "item.h"
+
 
 Market::Market(vector<Weapon*>& w, vector<Armor*>& a, vector<Potion*>& p) : weparray(w), armarray(a), potarray(p){
-  cout << "A market was just created" << endl;
+    cout << "A market was just created" << endl;
 }
-Market::Market(){
-  //apodesmeush ta items gt stous pinakes exw deiktes
+Market::~Market() {
+    //apodesmeush ta items gt stous pinakes exw deiktes
 }
 void Market::printweparray(){
   int k=weparray.size();
@@ -99,3 +95,12 @@ int a;
     else continue;
   }
 }
+//void Market::print(){
+//    //////////////////////////k=number of heroes/////////////////////////////////////////////////////
+//
+//    int k;
+//    for (int i=0; i<k; i++)
+//    {
+//        //xreiazomai kati pou na mou epistrefei ton arithmo twn irwwn kai ta onomata tou kathenos
+//    }
+//}
