@@ -16,7 +16,7 @@ Grid::Grid(int row, int col)
     {
         for (int c=0; c<columns; c++)
         {
-
+            
             square[r][c] = new class Block(r, c, "Common");
         }
     }
@@ -162,7 +162,7 @@ int Grid::add_Market(int x, int y)
 int Grid::add_NonAccessible(int x, int y)
 {
     delete square[x][y];
-    square[x][y] = new class Block(x,y,"Non-Accessible");
+    square[x][y] = new class Block(x,y,"NonAccessible");
     return 0;
 }
 

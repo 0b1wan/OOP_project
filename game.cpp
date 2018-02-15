@@ -27,7 +27,7 @@ void Game::begin()
     theGrid->add_Market(1, 1);
     theGrid->add_Market(4, 3);
     theGrid->add_Market(3, 4);
-    theGrid->add_NonAccessible(4, 4);
+    theGrid->add_NonAccessible(2, 1);
 
 
     theHeros.front()->attack(theMonsters.front());
@@ -164,49 +164,62 @@ void Game::surprise(vector<Hero*> heros) {
 
 void Game::move_heros(string direction)
 {
+    // figure future location
+    int fr, fc;
 
-    int chance = rand() % 100 + 1;
-    if (chance < 20)
-        surprise(theHeros);
-    
-    if ((direction == "up" ) && (theHeros[0]->r_co > 0))
+    if (direction == "up")
     {
-        theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
-        for (int i=0; i<total_Heros; i++) {
-            theHeros[i]->r_co--;
-            theGrid->square[theHeros[i]->r_co][theHeros[i]->c_co]->heros.push_back(theHeros[i]);
-        }
-            cout << " Moved " << direction << ". Team now at pos [" << theHeros[0]->r_co << "," << theHeros[0]->c_co << "]" << endl;
+        fr = theHeros[0]->r_co -1;
+        fc = theHeros[0]->c_co;
     }
-    else if ((direction == "down") && (theHeros[0]->r_co < grid_r-1))
+    else if (direction == "down")
     {
-        theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
-        for (int i=0; i<total_Heros; i++) {
-            theHeros[i]->r_co++;
-            theGrid->square[theHeros[i]->r_co][theHeros[i]->c_co]->heros.push_back(theHeros[i]);
-        }
-            cout << " Moved " << direction << ". Team now at pos [" << theHeros[0]->r_co << "," << theHeros[0]->c_co << "]" << endl;
+        fr = theHeros[0]->r_co +1;
+        fc = theHeros[0]->c_co;
     }
-    else if ((direction == "left") && (theHeros[0]->c_co > 0))
+    else if (direction == "left")
     {
-        theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
-        for (int i=0; i<total_Heros; i++) {
-            theHeros[i]->c_co--;
-            theGrid->square[theHeros[i]->r_co][theHeros[i]->c_co]->heros.push_back(theHeros[i]);
-        }
-        cout << " Moved " << direction << ". Team now at pos [" << theHeros[0]->r_co << "," << theHeros[0]->c_co << "]" << endl;
-    }
-    else if ((direction == "right") && (theHeros[0]->c_co < grid_c-1))
-    {
-        theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
-        for (int i=0; i<total_Heros; i++) {
-            theHeros[i]->c_co++;
-            theGrid->square[theHeros[i]->r_co][theHeros[i]->c_co]->heros.push_back(theHeros[i]);
-        }
-        cout << " Moved " << direction << ". Team now at pos [" << theHeros[0]->r_co << "," << theHeros[0]->c_co << "]" << endl;
+        fr = theHeros[0]->r_co;
+        fc = theHeros[0]->c_co -1;
     }
     else
+    {
+        fr = theHeros[0]->r_co;
+        fc = theHeros[0]->c_co +1;
+    }
+
+    // check location within bounds
+    if ((fc < 0) || (fr < 0) || (fc > this->grid_c) || (fr > this->grid_r)) {
         cout << " Moving " << direction << " not allowed. Map edge." << endl;
+        return;
+    }
+
+    // check block_type is accessible
+    if (theGrid->square[fr][fc]->block_type == "NonAccessible")
+    {
+        cout << " Moving " << direction << " not allowed. Block is Non Accessible." << endl;
+        return;
+    }
+
+    // check if block_type is market
+    if (theGrid->square[fr][fc]->block_type == "Market")
+        foundMarket();
+    else {
+        // fight some monsters in the way
+        int chance = rand() % 100 + 1;
+        if (chance < 20)
+            surprise(theHeros);
+    }
+    
+    // actually move the heros
+    theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
+    for (int i=0; i<total_Heros; i++) {
+        theHeros[i]->r_co = fr;
+        theHeros[i]->c_co = fc;
+        theGrid->square[fr][fc]->heros.push_back(theHeros[i]);
+    }
+    cout << " Moved " << direction << ". Team now at pos [" << fr << "," << fc << "]" << endl;
+
 }
 
 void Game::askToMoveHeros()
@@ -258,24 +271,24 @@ void Game::showHerosExpanded()
 
         string herotype;
         if (hero->hero_type == "Sorcerer")
-            herotype.append("|  " + hero->hero_type + "  | ");
+            herotype.append(" |  " + hero->hero_type + "  | ");
         else
-            herotype.append("|  " + hero->hero_type + "   |");
+            herotype.append(" |  " + hero->hero_type + "   |");
 
-        Textbox * t1 = new Textbox( {"@------------+-",
+        Textbox * t1 = new Textbox( {" @------------+-",
                                       herotype,
-                                     "+------------+-",
-                                     "|       Mana | ",
-                                     "|     Health | ",
-                                     "+------------+-",
-                                     "|     Damage | ",
-                                     "|   Strength | ",
-                                     "|  Dexterity | ",
-                                     "|    Agility | ",
-                                     "+------------+-",
-                                     "|       Gold | ",
-                                     "| Experience | ",
-                                     "@------------+-", "\n"} );
+                                     " +------------+-",
+                                     " |       Mana | ",
+                                     " |     Health | ",
+                                     " +------------+-",
+                                     " |     Damage | ",
+                                     " |   Strength | ",
+                                     " |  Dexterity | ",
+                                     " |    Agility | ",
+                                     " +------------+-",
+                                     " |       Gold | ",
+                                     " | Experience | ",
+                                     " @------------+-", "\n"} );
 
         mymap.add_textbox(t1, -1, true);
 
@@ -454,6 +467,11 @@ bool Game::showPossibleActions()
 
     return true;
 }
+
+void Game::foundMarket() {
+    return;
+}
+
 
 
 

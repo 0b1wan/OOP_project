@@ -1,3 +1,8 @@
+#include "item.h"
+#include "game.hpp"
+using namespace std;
+
+
 class Market
 {
 private:

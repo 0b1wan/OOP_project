@@ -8,9 +8,6 @@
 
 //#define _DEBUG
 
-#include <iostream>
-#include "living.hpp"
-#include "item.cpp"
 #include "game.hpp"
 
 using namespace std;
@@ -21,7 +18,7 @@ int main(int argc, const char * argv[]) {
     class Game* mygame = new Game(5, 15);
 
 
-
+    *mygame->theGrid->square[5] = NULL;
     mygame->begin();
     
     return 0;
