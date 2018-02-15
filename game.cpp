@@ -30,7 +30,7 @@ void Game::begin()
     theGrid->add_NonAccessible(2, 1);
 
 
-    theHeros.front()->attack(theMonsters.front());
+    //theHeros.front()->attack(theMonsters.front());
 
     cout << " Welcome to the Game! " << endl << endl;
     cout << " This is how the world looks right now... " << endl;
@@ -156,7 +156,6 @@ void Game::surprise(vector<Hero*> heros) {
     // Pick a hero
     // Pick a monster
     cout << " Select Hero ";
-
 
 }
 

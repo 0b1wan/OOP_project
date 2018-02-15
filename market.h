@@ -1,5 +1,8 @@
 #include "item.h"
 #include "game.hpp"
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
 
