@@ -20,12 +20,10 @@ void Game::begin()
 {
 
     add_Hero_Warrior(0,0, "Jesus", 9);
-    add_Hero_Sorcerer(0,0);
-    add_Hero_Paladin(0,0);
+    add_Hero_Sorcerer(0,0, "jessy", 10);
+    add_Hero_Paladin(0,0, "woosy" , 10);
 
     add_Monster_Dragon(3, 3, "Josh" , 6);
-
-    theHeros[0]->attack(theMonsters[0]);
 
     theGrid->add_Market(1, 1);
     theGrid->add_Market(4, 3);
@@ -150,18 +148,80 @@ class Monster * Game::randMonster(Hero * thehero) {
 
 void Game::surprise(vector<Hero*> heros) {
 
-    // create random monsters
-    class vector<Monster*> monsters;
-    for (int i=0; i<(rand() % 3 + 1 ); i++) {
-        monsters.push_back(randMonster(heros[i]));
+    // create random monster
+    Monster * mymonster = randMonster(theHeros[0]);
+
+    cout << "\n Random monster Appeared!";
+    mymonster->print_stats();
+
+    for (int i=0; i<total_Heros; i++) {
+        if (theHeros[i]->isAlive()) {
+            cout << " " << i + 1 << ". " << theHeros[i]->who() << endl;
+        }
     }
 
-    // Pick a hero
-    // Pick a monster
-    cout << " Select Hero ";
+    string i;
+    int ii = -1;
+    do {
+        cout << " \n Select Hero for fight: \n > ";
+        cin >> i;
+        if (i == "1")
+            if (theHeros[0]->isAlive()) {
+                ii = 0;
+                break;
+            }
+        if (i == "2")
+            if (theHeros[1]->isAlive()) {
+                ii = 1;
+                break;
+            }
+        if (i == "3")
+            if (theHeros[2]->isAlive()) {
+                ii = 2;
+                break;
+            }
+    } while(1);
+
+    cout << " Commencing fight... \n" << endl;
+    cout << " " <<  theHeros[ii]->name << " *** VS *** " << mymonster->name << endl << endl;
+
+    cout << "\n What would you like to do?" << endl;
+    cout << " 1. Attack " << endl;
+    cout << " 2. Cast Spell " << endl;
+    cout << " 3. Use Potion " << endl;
+
+
+    string k;
+    do {
+        cout << "\n > ";
+        cin >> k;
+        if ((k == "1") || (k == "2") || (k == "3"))
+            break;
+    } while(1);
+    cout << endl;
+
+    if (k == "1")
+        theHeros[ii]->attack(mymonster);
+    else if (k== "2")
+    {/* cast spell */}
+    else if (k== "3")
+    {/* use potion */}
+
+    if (checkHerosAlive() == false)
+        exit(1);
 
 }
 
+bool Game::checkHerosAlive() {
+
+    int dead = 0;
+    for (int i=0; i<total_Heros; i++) {
+        if (!theHeros[i]->isAlive())
+            dead++;
+    }
+
+    return dead != total_Heros;
+}
 
 
 void Game::move_heros(string direction)
@@ -191,7 +251,7 @@ void Game::move_heros(string direction)
     }
 
     // check location within bounds
-    if ((fc < 0) || (fr < 0) || (fc > this->grid_c) || (fr > this->grid_r)) {
+    if ((fc < 0) || (fr < 0) || (fc >= this->grid_c) || (fr >= this->grid_r)) {
         cout << " Moving " << direction << " not allowed. Map edge." << endl;
         return;
     }

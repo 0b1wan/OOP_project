@@ -197,7 +197,7 @@ public:
     {
         damage_max = dmax + 3*dmax*sqrt((double)level);
         damage_min = dmin + dmax*sqrt((double)level);
-        defence = def + def*sqrt((double)level);
+        defence = def + 5*sqrt((double)level);
         miss_chance = miss;
         kill_exp = level*10;
         kill_gold = level*50;

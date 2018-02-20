@@ -58,6 +58,7 @@ public:
     void move_heros(string direction);
     void surprise(vector<Hero*>);
     void foundMarket();
+    bool  checkHerosAlive();
 
     class Monster* randMonster(Hero *);
 };

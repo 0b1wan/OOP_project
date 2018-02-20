@@ -224,6 +224,8 @@ int Monster::accept_dmg(int amnt)
     if (!isAlive()) {
         return -1;
     }
+    if (actual < 0)
+        actual = 0;
     return actual;
 }
 
