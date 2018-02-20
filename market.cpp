@@ -1,10 +1,15 @@
-#include "market.h"
 
 
 
-Market::Market(vector<Weapon*>& w, vector<Armor*>& a, vector<Potion*>& p) : weparray(w), armarray(a), potarray(p){
-    cout << "A market was just created" << endl;
+#include "market.hpp"
+
+
+
+Market::Market() {
+//    Weapon * temp = new Weapon();
+//    weparray.push_back(temp);
 }
+
 Market::~Market() {
     //apodesmeush ta items gt stous pinakes exw deiktes
 }
@@ -29,8 +34,9 @@ void Market::printpotarray(){
         cout << i+1 << ". " << potarray[i]->get_name() << endl;
     }
 }
+
 void Market::print() {
-    int k=Game::total_Heros;
+    int k = mygame->total_Heros;
     int a;
     for (int i=0; i<k; i++)
     {
@@ -95,3 +101,5 @@ void Market::print() {
         else continue;
     }
 }
+
+

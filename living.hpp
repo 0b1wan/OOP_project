@@ -15,6 +15,7 @@
 #include <string>
 #include <math.h>
 #include <random>
+#include "item.hpp"
 
 using namespace std;
 
@@ -100,7 +101,7 @@ public:
     { }
 
     // Main functions
-    int  do_dmg(class Monster*);
+    int do_dmg(class Monster*);
     int accept_dmg(class Monster*);
 
     void accept_gold(class Monster*);

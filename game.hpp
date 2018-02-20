@@ -16,6 +16,7 @@
 #include "grid.hpp"
 #include "living.hpp"
 #include "block.hpp"
+#include "market.hpp"
 
 
 class Game
@@ -31,7 +32,7 @@ public:
     class Grid* theGrid;
     vector<class Hero*> theHeros;
     vector<class Monster*> theMonsters;
-
+    class Market* theMarket;
 
     Game(int, int);
     ~Game();

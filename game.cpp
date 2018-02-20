@@ -24,6 +24,9 @@ void Game::begin()
     add_Hero_Paladin(0,0);
 
     add_Monster_Dragon(3, 3, "Josh" , 6);
+
+    theHeros[0]->attack(theMonsters[0]);
+
     theGrid->add_Market(1, 1);
     theGrid->add_Market(4, 3);
     theGrid->add_Market(3, 4);
@@ -468,6 +471,8 @@ bool Game::showPossibleActions()
 }
 
 void Game::foundMarket() {
+
+
     return;
 }
 

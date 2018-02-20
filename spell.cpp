@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#include "spell.h"
+#include "spell.hpp"
 
         Spell::Spell(string a, int b, int c, int d, int e, int f) : name(a), price(b), minlevel(c), mindamage(d), maxdamage(e), mana(f)
         {
