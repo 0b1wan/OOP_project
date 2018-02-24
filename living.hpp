@@ -73,9 +73,9 @@ public:
     int levelup_atrb_modifier;
     string hero_type;
 
-    std::vector<Weapon *> Weapons;
-    std::vector<Armor *>  Armour;
-    std::vector<Potion *> Potions;
+    std::vector<Weapon * > Weapons;
+    std::vector<Armor * >  Armour;
+    std::vector<Potion * > Potions;
     //std::vector<void*> inventory;
 
     Hero(string nm, int lv, int hlth, int man, int str, int dex, int ag, int mon,

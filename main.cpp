@@ -17,7 +17,8 @@ int main(int argc, const char * argv[]) {
 
     class Game* mygame = new Game(5, 15);
 
-    
+
     mygame->begin();
     return 0;
 }
+

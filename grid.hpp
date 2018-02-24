@@ -37,7 +37,7 @@ class Map
 public:
     int r_elements;
     int c_elements;
-    vector<vector<class Textbox*>> textbox;
+    vector<vector<class Textbox*> > textbox;
 
     void add_textbox(class Textbox*, int charLimit = -1, bool newline = false);
     int lineLength(int lineNumber);

@@ -33,11 +33,11 @@ public:
 
 
     class Grid* theGrid;
-    vector<class Hero*> theHeros;
-    vector<class Monster*> theMonsters;
-    Market MyMarket;
+    vector<class Hero * > theHeros;
+    vector<class Monster * > theMonsters;
+    Market * theMarket;
 
-    Game(int, int, Market& );
+    Game(int, int);
     ~Game();
 
     // New Heros
@@ -59,7 +59,7 @@ public:
     void showHerosExpanded();
     void askToMoveHeros();
     void move_heros(string direction);
-    void surprise(vector<Hero*>);
+    void surprise(vector<Hero * >);
     void foundMarket();
     bool  checkHerosAlive();
     void printweparray();

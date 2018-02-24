@@ -11,8 +11,8 @@ using namespace std;
 
 int main()
 {
-  Market MyMarket;
-  Game MyGame(6,6,MyMarket);
+  Market theMarket;
+  Game MyGame(6,6,theMarket);
   cout << "The Weapons are:" << endl;
   MyGame.printweparray();
   cout << "The Armor are:" << endl;

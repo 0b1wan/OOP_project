@@ -9,17 +9,20 @@
 #include "game.hpp"
 
 
-Game::Game(int r, int c, Market& m) : MyMarket(m)
+Game::Game(int r, int c)
 {
     grid_c = c;
     grid_r = r;
     total_Heros = 0;
     theGrid = new class Grid(r, c);
 }
+
 Game::~Game(){;}
 
 void Game::begin()
 {
+
+    theMarket = new Market;
 
     add_Hero_Warrior(0,0, "Jesus", 9);
     add_Hero_Sorcerer(0,0, "jessy", 10);
@@ -32,8 +35,6 @@ void Game::begin()
     theGrid->add_Market(3, 4);
     theGrid->add_NonAccessible(2, 1);
 
-
-    //theHeros.front()->attack(theMonsters.front());
 
     cout << " Welcome to the Game! " << endl << endl;
     cout << " This is how the world looks right now... " << endl;
@@ -539,44 +540,44 @@ void Game::foundMarket() {
 }
 
 void Game::printweparray(){
-    int k=MyMarket.get_weparray().size();
+    int k=(int)theMarket->get_weparray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << MyMarket.get_weparray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_weparray()[i]->get_name() << endl;
     }
 }
 void Game::printarmarray(){
-    int k=MyMarket.get_armarray().size();
+    int k=(int)theMarket->get_armarray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << MyMarket.get_armarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_armarray()[i]->get_name() << endl;
     }
 }
 void Game::printpotarray(){
-    int k=MyMarket.get_potarray().size();
+    int k=(int)theMarket->get_potarray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << MyMarket.get_potarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_potarray()[i]->get_name() << endl;
     }
 }
 void Game::printicearray(){
-  int k=MyMarket.get_icearray().size();
+  int k=(int)theMarket->get_icearray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << MyMarket.get_icearray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_icearray()[i]->get_name() << endl;
   }
 }
 void Game::printfirarray(){
-  int k=MyMarket.get_firarray().size();
+  int k=(int)theMarket->get_firarray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << MyMarket.get_firarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_firarray()[i]->get_name() << endl;
   }
 }
 void Game::printligarray(){
-  int k=MyMarket.get_ligarray().size();
+  int k=(int)theMarket->get_ligarray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << MyMarket.get_ligarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_ligarray()[i]->get_name() << endl;
   }
 }
