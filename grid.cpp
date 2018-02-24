@@ -16,7 +16,7 @@ Grid::Grid(int row, int col)
     {
         for (int c=0; c<columns; c++)
         {
-            
+
             square[r][c] = new class Block(r, c, "Common");
         }
     }
@@ -283,29 +283,8 @@ class Textbox* Map::HerosBlock(vector<class Hero*> heros) {
         }
         text.push_back(thestring.str());
     }
-    
+
     myblock = new class Textbox(text, "Hero");
 
     return myblock;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

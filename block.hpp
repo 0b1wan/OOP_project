@@ -5,7 +5,6 @@
 //  Created by Andreas Chrysopoulos on 20/01/2018.
 //  Copyright © 2018 Andreas Chrysopoulos & Giannis Mystakidis. All rights reserved.
 //
-
 #ifndef block_h
 #define block_h
 
@@ -14,8 +13,6 @@
 #include <vector>
 #include "grid.hpp"
 #include "living.hpp"
-
-using namespace std;
 
 class Block
 {
@@ -36,6 +33,5 @@ public:
 
     bool hasHeros();
 };
-
 
 #endif /* block_h */

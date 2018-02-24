@@ -5,9 +5,8 @@
 //  Created by Andreas Chrysopoulos on 14/01/2018.
 //  Copyright © 2018 Andreas Chrysopoulos & Giannis Mystakidis. All rights reserved.
 //
-
-#ifndef living_hpp
-#define living_hpp
+#ifndef living_h
+#define living_h
 
 #include <stdio.h>
 #include <iostream>
@@ -18,8 +17,6 @@
 #include "item.h"
 
 using namespace std;
-
-
 
 /*********************** LIVING ***********************/
 class Living
@@ -267,5 +264,4 @@ public:
 
 };
 
-
-#endif /* living_hpp */
+#endif

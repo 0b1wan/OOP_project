@@ -1,3 +1,6 @@
+#ifndef spell_h
+#define spell_h
+
 class Spell
 {
     private:
@@ -53,3 +56,5 @@ class Lightingspell : public Spell
         int get_reduction();
         int get_rounds();
 };
+
+#endif

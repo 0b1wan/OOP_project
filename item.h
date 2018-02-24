@@ -1,7 +1,9 @@
+#ifndef item_h
+#define item_h
+
 #include <iostream>
 #include <string>
 using namespace std;
-
 
 class Item
 {
@@ -51,3 +53,5 @@ public:
     string get_ability();
     int get_increasement();
 };
+
+#endif

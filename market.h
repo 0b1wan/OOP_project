@@ -1,3 +1,6 @@
+#ifndef market_h
+#define market_h
+
 class Market
 {
 private:
@@ -31,3 +34,5 @@ public:
 
 
 };
+
+#endif

@@ -19,6 +19,8 @@
 #include "game.hpp"
 #include <sstream>
 
+using namespace std;
+
 class Textbox
 {
 public:
@@ -104,6 +106,4 @@ public:
 
 };
 
-
-
-#endif /* grid_h */
+#endif

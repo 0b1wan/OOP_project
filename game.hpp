@@ -5,9 +5,8 @@
 //  Created by Andreas Chrysopoulos on 20/01/2018.
 //  Copyright © 2018 Andreas Chrysopoulos & Giannis Mystakidis. All rights reserved.
 //
-
-#ifndef game_hpp
-#define game_hpp
+#ifndef game_h
+#define game_h
 
 #include <stdio.h>
 #include <iostream>
@@ -19,6 +18,8 @@
 #include "item.h"
 #include "spell.hpp"
 #include "market.h"
+
+using namespace std;
 
 
 class Game
@@ -34,9 +35,9 @@ public:
     class Grid* theGrid;
     vector<class Hero*> theHeros;
     vector<class Monster*> theMonsters;
-    class Market* theMarket;
+    Market MyMarket;
 
-    Game(int, int);
+    Game(int, int, Market& );
     ~Game();
 
     // New Heros
@@ -64,14 +65,12 @@ public:
     void printweparray();
     void printarmarray();
     void printpotarray();
+    void printicearray();
+    void printfirarray();
+    void printligarray();
     void print();
 
     class Monster* randMonster(Hero *);
 };
 
-
-
-
-
-
-#endif /* game_hpp */
+#endif
