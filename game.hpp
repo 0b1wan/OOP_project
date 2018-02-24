@@ -16,7 +16,9 @@
 #include "grid.hpp"
 #include "living.hpp"
 #include "block.hpp"
-#include "market.hpp"
+#include "item.h"
+#include "spell.hpp"
+#include "market.h"
 
 
 class Game
@@ -59,6 +61,10 @@ public:
     void surprise(vector<Hero*>);
     void foundMarket();
     bool  checkHerosAlive();
+    void printweparray();
+    void printarmarray();
+    void printpotarray();
+    void print();
 
     class Monster* randMonster(Hero *);
 };

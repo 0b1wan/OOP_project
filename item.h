@@ -1,10 +1,5 @@
-
-#ifndef item_h
-#define item_h
-
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 
@@ -26,12 +21,12 @@ class Weapon : public Item
 {
 private:
     const int damage;
-    const bool hand;
+    const string hand;
 public:
-    Weapon(string a, int b, int c, int d, bool e);
+    Weapon(string a, int b, int c, int d, string e);
     ~Weapon();
     int get_damage();
-    bool get_hand();
+    string get_hand();
 };
 
 class Armor : public Item
@@ -56,5 +51,3 @@ public:
     string get_ability();
     int get_increasement();
 };
-
-#endif

@@ -272,7 +272,7 @@ void Game::move_heros(string direction)
         if (chance < 20)
             surprise(theHeros);
     }
-    
+
     // actually move the heros
     theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->heros.clear();
     for (int i=0; i<total_Heros; i++) {
@@ -313,7 +313,7 @@ void Game::askToMoveHeros()
         default:
             break;
     }
-    
+
 }
 
 string StringToUpper(string strToConvert)
@@ -536,9 +536,24 @@ void Game::foundMarket() {
     return;
 }
 
-
-
-
-
-
-
+void Game::printweparray(){
+    int k=get_weparray().size();
+    for (int i=0;i<k;i++)
+    {
+        cout << i+1 << ". " << get_weparray()[i]->get_name() << endl;
+    }
+}
+void Game::printarmarray(){
+    int k=get_armarray.size();
+    for (int i=0;i<k;i++)
+    {
+        cout << i+1 << ". " << get_armarray()[i]->get_name() << endl;
+    }
+}
+void Game::printpotarray(){
+    int k=get_potarray.size();
+    for (int i=0;i<k;i++)
+    {
+        cout << i+1 << ". " << get_potarray()[i]->get_name() << endl;
+    }
+}

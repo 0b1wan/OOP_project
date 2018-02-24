@@ -1,4 +1,4 @@
-#include "item.hpp"
+#include "item.h"
 
 Item::Item(string a, int b, int c) : name(a), price(b), minlevel(c)
 {
@@ -19,7 +19,7 @@ int Item::get_minlevel() const{
 }
 
 
-Weapon::Weapon(string a, int b, int c, int d, bool e) : Item(a,b,c), damage(d), hand(e)
+Weapon::Weapon(string a, int b, int c, int d, string e) : Item(a,b,c), damage(d), hand(e)
 {
     cout << "Just constructed a Weapon" << endl;
 }
@@ -30,7 +30,7 @@ Weapon::~Weapon()
 int Weapon::get_damage(){
     return damage;
 }
-bool Weapon::get_hand(){
+string Weapon::get_hand(){
     return hand;
 }
 
