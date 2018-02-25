@@ -23,8 +23,7 @@ Game::~Game(){
   //deallocate theHeros vector
   for(int i=0;i<theHeros.size();i++) {delete theHeros[i];}
   //deallocate grid
-
-  cout << "Just destroyed the Game" << endl;
+  delete theGrid;
 }
 
 void Game::begin()
@@ -119,28 +118,6 @@ int Game::add_Hero_Sorcerer(int r, int c,string nm, int lv, int hlth, int man, i
 
 
 /********** ADD MONSTERS **********/
-
-
-
-// int Game::add_Monster_Dragon(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-//     class Dragon* myDragon = new class Dragon(nm, lvl, hlth, dmin, dmax, def, miss);
-//     theMonsters.push_back(myDragon);
-//     return 0;
-// }
-//
-//
-// int Game::add_Monster_Spirit(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-//     class Spirit* mySpirit = new class Spirit(nm, lvl, hlth, dmin, dmax, def, miss);
-//     theMonsters.push_back(mySpirit);
-//     return 0;
-// }
-//
-//
-// int Game::add_Monster_Exosceleton(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-//     class Exosceleton* myExosceleton = new class Exosceleton(nm, lvl, hlth, dmin, dmax, def, miss);
-//     theMonsters.push_back(myExosceleton);
-//     return 0;
-// }
 
 
 class Monster * Game::randMonster(Hero * thehero) {

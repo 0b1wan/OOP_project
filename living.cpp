@@ -34,7 +34,6 @@ Hero::~Hero(){
   for(int i=0;i<Firespells.size();i++) { delete Firespells[i];}
   //deallocate Lightingspells
   for(int i=0;i<Lightingspells.size();i++) { delete Lightingspells[i];}
-  cout << "Just destroyed a Hero" << endl;
 }
 
 
@@ -415,4 +414,3 @@ void Monster::lightingspelled(Lightingspell* light) {
             miss_chance = 90;
     }
 }
-

@@ -152,6 +152,7 @@ Grid::~Grid()
     delete[] square;
 
     //deallocate theMap
+    delete theMap;
 
 }
 int Grid::add_Market(int x, int y)
@@ -209,6 +210,7 @@ void Map::show()
             cout << endl;
         }
     }
+
 }
 
 
@@ -261,7 +263,31 @@ Textbox::Textbox(vector<string> txt, string type)
         text.push_back(txt[i]);
 }
 
+Map::~Map(){
+  //Deallocate the inner Textbox* (pointers) of the textbox vector
+  for (int i=0;i<textbox.size();i++)
+  {
+    for (int j=0;j<textbox[i].size();j++)
+    {
+      delete textbox[i][j];
+    }
+  }
+  delete HorizontalBlock1;
+  delete HorizontalBlock2;
+  delete HorizontalBlock3;
+  delete HorizontalBlock4;
+  delete HorizontalBlock5;
+  delete VerticalBlock;
+  delete EmptyBlock;
+  delete MarketBlock;
+  delete NonAccessibleBlock;
+  delete Space;
+  delete TripleSpace;
+  delete Newline;
+  delete MarketBlockWTHeros;
 
+
+}
 
 class Textbox* Map::HerosBlock(vector<class Hero*> heros) {
 

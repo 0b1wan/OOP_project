@@ -6,7 +6,7 @@ Item::Item(string a, int b, int c) : name(a), price(b), minlevel(c)
 }
 Item::~Item()
 {
-    cout << "Just destroyed an Item" << endl;
+  ;
 }
 string Item::get_name() const{
     return name;
@@ -25,7 +25,7 @@ Weapon::Weapon(string a, int b, int c, int d, string e) : Item(a,b,c), damage(d)
 }
 Weapon::~Weapon()
 {
-    cout << "Just destroyed a Weapon" << endl;
+  ;
 }
 int Weapon::get_damage(){
     return damage;
@@ -42,7 +42,7 @@ Armor::Armor(string a, int b, int c, int d) : Item(a,b,c), reduction(d)
 }
 Armor::~Armor()
 {
-    cout << "Just destroyed an Armor" << endl;
+  ;
 }
 int Armor::get_reduction(){
     return reduction;
@@ -56,7 +56,7 @@ Potion::Potion(string a, int b, int c, string d, int e) : Item(a,b,c), ability(d
 }
 Potion::~Potion()
 {
-    cout << "Just destroyed a Potion" << endl;
+  ;
 }
 string Potion::get_ability(){
     return ability;

@@ -29,7 +29,7 @@ public:
         column = c;
         block_type = type;
     };
-    ~Block() {} ;
+    ~Block() {;}
 
     bool hasHeros();
 };

@@ -30,6 +30,7 @@ public:
     vector<string> text;
 
     Textbox(vector<string>, string srt = "Default");
+    ~Textbox(){;}
 };
 
 class Map
@@ -77,6 +78,7 @@ public:
         Newline =           new Textbox({"\n"}, "Newline");
 
     }
+    ~Map();
 
     class Textbox* HerosBlock(vector<class Hero*>);
 };

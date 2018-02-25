@@ -7,11 +7,11 @@ using namespace std;
 
         Spell::Spell(string a, int b, int c, int d, int e, int f) : name(a), price(b), minlevel(c), mindamage(d), maxdamage(e), mana(f)
         {
-            cout << "Just constructed a Spell" << endl;
+
         }
         Spell::~Spell()
         {
-            cout << "Just destroyed a Spell" << endl;
+          ;
         }
         string Spell::get_name() const{
             return name;
@@ -36,11 +36,11 @@ using namespace std;
 
         Icespell::Icespell(string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
-            cout << "Just constructed an Icespell" << endl;
+          ;
         }
         Icespell::~Icespell()
         {
-            cout << "Just destroyed an Icespell" << endl;
+          ;
         }
         int Icespell::get_reduction(){
             return reduction;
@@ -53,11 +53,11 @@ using namespace std;
 
         Firespell::Firespell(string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
-            cout << "Just constructed a Firespell" << endl;
+          ;
         }
         Firespell::~Firespell()
         {
-            cout << "Just destroyed a Firespell" << endl;
+          ;
         }
         int Firespell::get_reduction(){
             return reduction;
@@ -70,11 +70,11 @@ using namespace std;
 
         Lightingspell::Lightingspell (string a, int b, int c, int d, int e, int f, int g, int h) : Spell(a,b,c,d,e,f), reduction(g), rounds(h)
         {
-            cout << "Just constructed a Lightingspell" << endl;
+          ;
         }
         Lightingspell::~Lightingspell()
         {
-            cout << "Just destroyed a Lightingspell" << endl;
+          ;
         }
         int Lightingspell::get_reduction(){
             return reduction;
