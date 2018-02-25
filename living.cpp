@@ -363,7 +363,6 @@ void Hero::remove_gold(int a){
 void Hero::add_gold(int a){
   gold=gold+a;
 }
-<<<<<<< HEAD
 
 void Hero::equipPotion(class Potion * thepotion) {
     current_potion = thepotion;
@@ -416,5 +415,4 @@ void Monster::lightingspelled(Lightingspell* light) {
             miss_chance = 90;
     }
 }
-=======
->>>>>>> 06d72cc88f816402c2bef83bdbc8e06f0fc46c1f
+
