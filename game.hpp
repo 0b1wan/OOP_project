@@ -68,7 +68,8 @@ public:
     void printicearray();
     void printfirarray();
     void printligarray();
-    void print();
+    void shopping();
+    void printinventory();
 
     class Monster* randMonster(Hero *);
 };

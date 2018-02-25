@@ -261,3 +261,46 @@ void Monster::print_stats()
 string Monster::who() {
     return monster_type + "(" + name + ")";
 }
+
+void Hero::add_weapon(Weapon * a){
+  Weapons.push_back(a);
+}
+void Hero::add_armor(Armor * a){
+  Armour.push_back(a);
+}
+void Hero::add_potion(Potion * a){
+  Potions.push_back(a);
+}
+void Hero::add_icespell(Icespell * a){
+  Icespells.push_back(a);
+}
+void Hero::add_firespell(Firespell * a){
+  Firespells.push_back(a);
+}
+void Hero::add_lightingspell(Lightingspell * a){
+  Lightingspells.push_back(a);
+}
+void Hero::remove_weapon(int a){
+  Weapons.erase(Weapons.begin()+a);
+}
+void Hero::remove_armor(int a){
+  Armour.erase(Armour.begin()+a);
+}
+void Hero::remove_potion(int a){
+  Potions.erase(Potions.begin()+a);
+}
+void Hero::remove_icespell(int a){
+  Icespells.erase(Icespells.begin()+a);
+}
+void Hero::remove_firespell(int a){
+  Firespells.erase(Firespells.begin()+a);
+}
+void Hero::remove_lightingspell(int a){
+  Lightingspells.erase(Lightingspells.begin()+a);
+}
+void Hero::remove_gold(int a){
+  gold=gold-a;
+}
+void Hero::add_gold(int a){
+  gold=gold+a;
+}
