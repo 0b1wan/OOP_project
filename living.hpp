@@ -74,12 +74,21 @@ public:
     int levelup_atrb_modifier;
     string hero_type;
 
+    Potion * current_potion;
+    Weapon * current_weapon;
+    Armor  * current_armor;
+
     std::vector<Weapon * > Weapons;
     std::vector<Armor * >  Armour;
     std::vector<Potion * > Potions;
     std::vector<Icespell * > Icespells;
     std::vector<Firespell * > Firespells;
     std::vector<Lightingspell * > Lightingspells;
+
+    int get_weapon_damage();
+    int get_armor();
+    int get_potion_str();
+    int get_potion_ag();
 
     void add_weapon(Weapon *);
     void add_armor(Armor *);
@@ -110,6 +119,9 @@ public:
         levelup_exp_modifier = 25;
         levelup_experience = levelup_exp_modifier*level;
         levelup_atrb_modifier = 10;
+        current_potion = nullptr;
+        current_weapon = nullptr;
+        current_armor = nullptr;
     }
 
     ~Hero()
@@ -124,7 +136,7 @@ public:
     void attack(class Monster*, int times=999999);
 
     void heal();
-
+    void equipPotion(class Potion *);
     virtual void level_up();
 
     // Helper functions
@@ -223,6 +235,9 @@ public:
     ~Monster()
     { }
 
+    void firespelled(Firespell*);
+    void icespelled(Icespell*);
+    void lightingspelled(Lightingspell*);
 
     int accept_dmg(int amount);
     void do_dmg(Hero*);

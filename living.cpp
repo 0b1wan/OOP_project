@@ -41,6 +41,18 @@ void Hero::attack(class Monster* enemy, int times)
         cout << " --- WINNER: " << enemy->who() << " ---" << endl << endl;
 }
 
+int Hero::get_weapon_damage() {
+    if (this->current_weapon != nullptr)
+        return current_weapon->get_damage();
+    else
+        return 0;
+}
+int Hero::get_armor() {
+    if (this->current_armor != nullptr)
+        return current_armor->get_reduction();
+    else
+        return 0;
+}
 
 
 int Hero::do_dmg(class Monster* enemy)
@@ -50,7 +62,7 @@ int Hero::do_dmg(class Monster* enemy)
 
     // Do damage to monster
     {
-        int dmg = enemy->accept_dmg(this->strenght /* + weapon strength */);
+        int dmg = enemy->accept_dmg(this->strenght + get_weapon_damage() + get_potion_str());
         if (dmg == -1)
         {
             cout << enemy->who() << " was killed" << endl;
@@ -94,6 +106,12 @@ int Hero::accept_dmg(class Monster* enemy)
     else
     {
         int damage = rand() % (enemy->damage_max - enemy->damage_min) + enemy->damage_min;
+        int armor = get_armor();
+        if (armor) {
+            damage -= armor;
+            if (damage < 0)
+                damage = 0;
+        }
         health -= damage;
         if (!isAlive())
             return -1;
@@ -205,8 +223,12 @@ void Paladin::level_up()
 
 
 void Hero::heal() {
-    if (health < max_health)
-        health += health*0.1;
+    if (health < max_health) {
+        if (health > 0)
+            health += health*0.1;
+        else
+            health -= health*0.1;
+    }
     if (health > max_health)
         health = max_health;
 }
@@ -314,3 +336,54 @@ void Hero::add_gold(int a){
   gold=gold+a;
 }
 
+void Hero::equipPotion(class Potion * thepotion) {
+    current_potion = thepotion;
+}
+
+int Hero::get_potion_str() {
+    if (current_potion != nullptr)
+        if (current_potion->get_ability() == "Strength")
+            return current_potion->get_increasement();
+    return 0;
+}
+
+int Hero::get_potion_ag() {
+    if (current_potion != nullptr)
+        if (current_potion->get_ability() == "Agillity")
+            return current_potion->get_increasement();
+    return 0;
+}
+
+void Monster::firespelled(Firespell* fire) {
+
+    if (health > 0) {
+        health -= (fire->get_mindamage() + fire->get_maxdamage() )/2;
+
+        this->defence -= fire->get_reduction();
+        if (defence < 0 )
+            defence = 0;
+    }
+}
+
+void Monster::icespelled(Icespell * ice) {
+
+    if (health > 0) {
+        health -= (ice->get_mindamage() + ice->get_maxdamage() )/2;
+        this->damage_min -= ice->get_reduction();
+        this->damage_max -= ice->get_reduction();
+        if (damage_min < 0)
+            damage_min = 0;
+        if (damage_max < 0)
+            damage_max = 0;
+    }
+}
+
+void Monster::lightingspelled(Lightingspell* light) {
+
+    if (health > 0) {
+        health -= (light->get_mindamage() + light->get_maxdamage() )/2;
+        this->miss_chance += light->get_reduction();
+        if (miss_chance > 90)
+            miss_chance = 90;
+    }
+}

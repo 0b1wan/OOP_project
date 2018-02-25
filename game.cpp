@@ -187,8 +187,9 @@ void Game::surprise(vector<Hero*> heros) {
             }
     } while(1);
 
+
     cout << " Commencing fight... \n" << endl;
-    cout << " " <<  theHeros[ii]->name << " *** VS *** " << mymonster->name << endl << endl;
+    cout << " " <<  theHeros[ii]->name << " *** VS *** " << mymonster->name << endl;
 
     cout << "\n What would you like to do?" << endl;
     cout << " 1. Attack " << endl;
@@ -208,9 +209,58 @@ void Game::surprise(vector<Hero*> heros) {
     if (k == "1")
         theHeros[ii]->attack(mymonster);
     else if (k== "2")
-    {/* cast spell */}
+    {
+        // cast spell
+
+        if (theHeros[ii]->Icespells.empty() && theHeros[ii]->Lightingspells.empty() && theHeros[ii]->Firespells.empty() )
+        {
+            cout << " This hero has no available spells " << endl;
+            theHeros[ii]->attack(mymonster);
+            return;
+        }
+
+        cout << "1. Firespell: " << theMarket->get_firarray()[0]->get_name() << endl;
+        cout << "2. Icespell: " << theMarket->get_icearray()[0]->get_name() << endl;
+        cout << "3. Lightingspell: " << theMarket->get_ligarray()[0]->get_name() << endl;
+
+        cout << " Select Spell \n > ";
+
+        int i;
+        cin >> i;
+        if (i == 1)
+            mymonster->firespelled(theMarket->get_firarray()[0]);
+        else if (i==2)
+            mymonster->icespelled(theMarket->get_icearray()[0]);
+        else if (i==3)
+            mymonster->lightingspelled(theMarket->get_ligarray()[0]);
+
+
+        cout << " Monster has been spelled! " << endl;
+        theHeros[ii]->attack(mymonster);
+
+    }
     else if (k== "3")
-    {/* use potion */}
+    {
+        cout << endl;
+        if (theHeros[ii]->Potions.empty()) {
+            cout << " This hero has no available potions " << endl;
+            theHeros[ii]->attack(mymonster);
+            return;
+        }
+
+        int in;
+        for (int j=0; j<theHeros[ii]->Potions.size(); j++)
+            cout << j+1 << ". " << theHeros[ii]->Potions[j]->get_name() << endl;
+        cout << "\n Choose Potion to use \n > " << endl << endl;
+        cin >> in;
+
+        try {
+            theHeros[ii]->equipPotion(theHeros[ii]->Potions[in]);
+            theHeros[ii]->attack(mymonster);
+        } catch (exception) {
+        }
+
+    }
 
     if (checkHerosAlive() == false)
         exit(1);
