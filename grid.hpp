@@ -61,20 +61,20 @@ public:
     // Basic Visual square
     Map() {
         r_elements = 0;
-        c_elements =0;
-        HorizontalBlock1 =  new Textbox({"+------"}, "Build");
-        HorizontalBlock2 =  new Textbox({"-------"}, "Build");
-        HorizontalBlock3 =  new Textbox({"-------+"}, "Build");
-        HorizontalBlock4 =  new Textbox({"|------"}, "Build");
-        HorizontalBlock5 =  new Textbox({"+------|"}, "Build");
-        VerticalBlock =     new Textbox({"|", "|", "|"}, "Build");
-        EmptyBlock =        new Textbox({"      ", "      ", "      "}, "Common");
-        MarketBlock =       new Textbox({"      ", "Market", "      "}, "Market");
-        MarketBlockWTHeros =new Textbox({"xHeros", "~~IN~~", "Market"}, "MarketWHeros");
-        NonAccessibleBlock =new Textbox({"XXXXXX", "XXXXXX", "XXXXXX"}, "NonAccessible");
-        Space =             new Textbox({" "}, "Space");
-        TripleSpace =       new Textbox({" ", " ", " "}, "Space");
-        Newline =           new Textbox({"\n"}, "Newline");
+        c_elements = 0;
+        HorizontalBlock1 =  new class Textbox({"+------"}, "Build");
+        HorizontalBlock2 =  new class Textbox({"-------"}, "Build");
+        HorizontalBlock3 =  new class Textbox({"-------+"}, "Build");
+        HorizontalBlock4 =  new class Textbox({"|------"}, "Build");
+        HorizontalBlock5 =  new class Textbox({"+------|"}, "Build");
+        VerticalBlock =     new class Textbox({"|", "|", "|"}, "Build");
+        EmptyBlock =        new class Textbox({"      ", "      ", "      "}, "Common");
+        MarketBlock =       new class Textbox({"      ", "Market", "      "}, "Market");
+        MarketBlockWTHeros =new class Textbox({"xHeros", "~~IN~~", "Market"}, "MarketWHeros");
+        NonAccessibleBlock =new class Textbox({"XXXXXX", "XXXXXX", "XXXXXX"}, "NonAccessible");
+        Space =             new class Textbox({" "}, "Space");
+        TripleSpace =       new class Textbox({" ", " ", " "}, "Space");
+        Newline =           new class Textbox({"\n"}, "Newline");
 
     }
 

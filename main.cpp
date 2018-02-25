@@ -1,26 +1,17 @@
-//
-//  main.cpp
-//  oop_project
-//
-//  Created by Andreas Chrysopoulos & Giannis Mystakidis on 14/01/2018.
-//  Copyright © 2018 Zulufox. All rights reserved.
-//
-
-//#define _DEBUG
-
-#include "game.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-int main(int argc, const char * argv[]) {
-    srand(((unsigned int)time(NULL)));
+#include "item.h"
+#include "spell.hpp"
+#include "market.h"
+#include "game.hpp"
 
-    class Game* mygame = new Game(5, 15);
+int main()
+{
+ Game MyGame(6,6);
+ MyGame.begin();
 
-
-    mygame->begin();
-
-    return 0;
 }
-
-
