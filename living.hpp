@@ -87,6 +87,14 @@ public:
     void add_icespell(Icespell *);
     void add_firespell(Firespell *);
     void add_lightingspell(Lightingspell *);
+    void remove_weapon(int);
+    void remove_armor(int);
+    void remove_potion(int);
+    void remove_icespell(int);
+    void remove_firespell(int);
+    void remove_lightingspell(int);
+    void remove_gold(int);
+    void add_gold(int);
 
     Hero(string nm, int lv, int hlth, int man, int str, int dex, int ag, int mon,
          int exp) : Living(nm, lv, hlth)

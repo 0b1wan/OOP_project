@@ -30,4 +30,9 @@ int main()
   cout << "...................................." << endl;
   MyGame.shopping();
   MyGame.printinventory();
+  MyGame.showHerosExpanded();
+  cout << "......................................" << endl;
+  MyGame.shopping();
+  MyGame.printinventory();
+  MyGame.showHerosExpanded();
 }

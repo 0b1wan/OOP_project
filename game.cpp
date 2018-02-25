@@ -636,78 +636,141 @@ void Game::shopping() {
                 cout << "Which one of these Weapons do you want to buy?" << endl;
                 printweparray();
                 cin >> a;
-                Weapon * wep = new Weapon(*theMarket->get_weparray()[a-1]);
-                theHeros[i]->add_weapon(wep);
+                if (theHeros[i]->gold >= theMarket->get_weparray()[a-1]->get_price())
+                {
+                   Weapon * wep = new Weapon(*theMarket->get_weparray()[a-1]);
+                   theHeros[i]->add_weapon(wep);
+                   theHeros[i]->remove_gold(theMarket->get_weparray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!" << endl;
             }
             else if (a==2){
                 cout << "Which one of these Armor do you want to buy?" << endl;
                 printarmarray();
                 cin >> a;
-                Armor * arm = new Armor(*theMarket->get_armarray()[a-1]);
-                theHeros[i]->add_armor(arm);
+                if (theHeros[i]->gold >= theMarket->get_armarray()[a-1]->get_price())
+                {
+                   Armor * arm = new Armor(*theMarket->get_armarray()[a-1]);
+                   theHeros[i]->add_armor(arm);
+                   theHeros[i]->remove_gold(theMarket->get_armarray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!"  << endl;
             }
             else if (a==3){
                 cout << "Which one of these Potions do you want to buy?" << endl;
                 printpotarray();
                 cin >> a;
-                Potion * pot = new Potion(*theMarket->get_potarray()[a-1]);
-                theHeros[i]->add_potion(pot);
+                if (theHeros[i]->gold >= theMarket->get_potarray()[a-1]->get_price())
+                {
+                   Potion * pot = new Potion(*theMarket->get_potarray()[a-1]);
+                   theHeros[i]->add_potion(pot);
+                   theHeros[i]->remove_gold(theMarket->get_potarray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!" << endl;
             }
             else if (a==4){
                 cout << "Which one of these Icespells do you want to buy?" << endl;
                 printicearray();
                 cin >> a;
-                Icespell * ice = new Icespell(*theMarket->get_icearray()[a-1]);
-                theHeros[i]->add_icespell(ice);
+                if (theHeros[i]->gold >= theMarket->get_icearray()[a-1]->get_price())
+                {
+                   Icespell * ice = new Icespell(*theMarket->get_icearray()[a-1]);
+                   theHeros[i]->add_icespell(ice);
+                   theHeros[i]->remove_gold(theMarket->get_icearray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!" << endl;
             }
             else if (a==5){
                 cout << "Which one of these Firespells do you want to buy?" << endl;
                 printfirarray();
                 cin >> a;
-                Firespell * fir = new Firespell(*theMarket->get_firarray()[a-1]);
-                theHeros[i]->add_firespell(fir);
+                if (theHeros[i]->gold >= theMarket->get_firarray()[a-1]->get_price())
+                {
+                   Firespell * fir = new Firespell(*theMarket->get_firarray()[a-1]);
+                   theHeros[i]->add_firespell(fir);
+                   theHeros[i]->remove_gold(theMarket->get_firarray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!" << endl;
             }
             else if (a==6){
                 cout << "Which one of these Lightingspells do you want to buy?" << endl;
                 printligarray();
                 cin >> a;
-                Lightingspell * lig = new Lightingspell(*theMarket->get_ligarray()[a-1]);
-                theHeros[i]->add_lightingspell(lig);
+                if (theHeros[i]->gold >= theMarket->get_ligarray()[a-1]->get_price())
+                {
+                   Lightingspell * lig = new Lightingspell(*theMarket->get_ligarray()[a-1]);
+                   theHeros[i]->add_lightingspell(lig);
+                   theHeros[i]->remove_gold(theMarket->get_ligarray()[a-1]->get_price());
+                }
+                else cout << "Not enough money!" << endl;
             }
             else continue;
         }
-//        else if (a==2){
-//            cout << "1. Weapons  2. Armor  3. Potions  0. Exit" << endl;
-//            cin >> a;
-//            if (a==1){
-//                cout << "Which one of these Weapons do you want to sell?" << endl;
-//                for (int i=0; i<theHeros[i]->Weapons.size(); i++)
-//                {
-//                    cout << i+1 << ". " << theHeros[i]->Weapons.name << endl;
-//                }
-//                cin >> a;
-//                //remove to theHeros[i]->Weapons[a-1] apo ta weapons tou hrwa kai add sta lefta tou to (theHeros[i]->Weapons[a-1].price)/2      }
-//            }
-//            if (a==2){
-//                cout << "Which one of these Armor do you want to sell?" << endl;
-//                for (int i=0; i<theHeros[i]->Armour.size(); i++)
-//                {
-//                    cout << i+1 << ". " << theHeros[i]->Armour.name << endl;
-//                }
-//                cin >> a;
-//                //remove to theHeros[i]->Armour[a-1] apo ta Armor tou hrwa kai add sta lefta tou to (theHeros[i]->Armour[a-1].price)/2      }
-//            }
-//            if (a==3){
-//                cout << "Which one of these Potions do you want to sell?" << endl;
-//                for (int i=0; i<theHeros[i]->Potions.size(); i++)
-//                {
-//                    cout << i+1 << ". " << theHeros[i]->Potions.name << endl;
-//                }
-//                cin >> a;
-//                //remove to theHeros[i]->Potions[a-1] apo ta potions tou hrwa kai add sta lefta tou to (theHeros[i]->Potions[a-1].price)/2      }
-//            }
-//            else continue;
-//        }
-//        else continue;
-//    }
-}}
+        else if (a==2){
+            cout << "1. Weapons  2. Armor  3. Potions  4. Icespells  5. Firespells  6. Lightingspells  0. Exit" << endl;
+            cin >> a;
+            if (a==1){
+                cout << "Which one of these Weapons do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Weapons.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Weapons[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_weapon(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Weapons[a-1]->get_price())/2 );
+            }
+            if (a==2){
+                cout << "Which one of these Armor do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Armour.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Armour[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_armor(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Armour[a-1]->get_price())/2 );
+            }
+            if (a==3){
+                cout << "Which one of these Potions do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Potions.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Potions[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_potion(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Potions[a-1]->get_price())/2 );
+            }
+            if (a==4){
+                cout << "Which one of these Icespells do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Icespells.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Icespells[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_icespell(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Icespells[a-1]->get_price())/2 );
+            }
+            if (a==5){
+                cout << "Which one of these Firespells do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Firespells.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Firespells[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_firespell(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Firespells[a-1]->get_price())/2 );
+            }
+            if (a==6){
+                cout << "Which one of these Lightingspells do you want to sell?" << endl;
+                for (int j=0; j<theHeros[i]->Lightingspells.size(); j++)
+                {
+                    cout << j+1 << ". " << theHeros[i]->Lightingspells[j]->get_name() << endl;
+                }
+                cin >> a;
+                theHeros[i]->remove_lightingspell(a-1);
+                theHeros[i]->add_gold( (theHeros[i]->Lightingspells[a-1]->get_price())/2 );
+            }
+            else continue;
+        }
+        else continue;
+    }
+}

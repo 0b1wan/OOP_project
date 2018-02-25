@@ -280,3 +280,27 @@ void Hero::add_firespell(Firespell * a){
 void Hero::add_lightingspell(Lightingspell * a){
   Lightingspells.push_back(a);
 }
+void Hero::remove_weapon(int a){
+  Weapons.erase(Weapons.begin()+a);
+}
+void Hero::remove_armor(int a){
+  Armour.erase(Armour.begin()+a);
+}
+void Hero::remove_potion(int a){
+  Potions.erase(Potions.begin()+a);
+}
+void Hero::remove_icespell(int a){
+  Icespells.erase(Icespells.begin()+a);
+}
+void Hero::remove_firespell(int a){
+  Firespells.erase(Firespells.begin()+a);
+}
+void Hero::remove_lightingspell(int a){
+  Lightingspells.erase(Lightingspells.begin()+a);
+}
+void Hero::remove_gold(int a){
+  gold=gold-a;
+}
+void Hero::add_gold(int a){
+  gold=gold+a;
+}
