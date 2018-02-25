@@ -34,7 +34,19 @@ Market::Market() {
 }
 
 Market::~Market() {
-    //apodesmeush ta items gt stous pinakes exw deiktes
+    //deallocate weparray
+    for(int i=0;i<weparray.size();i++) { delete weparray[i];}
+    //deallocate armarray
+    for(int i=0;i<armarray.size();i++) { delete armarray[i];}
+    //deallocate potarray
+    for(int i=0;i<potarray.size();i++) { delete potarray[i];}
+    //dealllocate icearray
+    for(int i=0;i<icearray.size();i++) { delete icearray[i];}
+    //deallocate firarray
+    for(int i=0;i<firarray.size();i++) { delete firarray[i];}
+    //deallocate ligarray
+    for(int i=0;i<ligarray.size();i++) { delete ligarray[i];}
+    cout << "Just destroyed a Market" << endl;
 }
 
 vector<Weapon *> Market::get_weparray(){

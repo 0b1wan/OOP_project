@@ -21,6 +21,22 @@ void Living::ressurect() {
     health = max_health;
 }
 
+Hero::~Hero(){
+  //deallocate Weapons
+  for(int i=0;i<Weapons.size();i++) { delete Weapons[i];}
+  //deallocate Armour
+  for(int i=0;i<Armour.size();i++) { delete Armour[i];}
+  //deallocate Potions
+  for(int i=0;i<Potions.size();i++) { delete Potions[i];}
+  //dealllocate Icespells
+  for(int i=0;i<Icespells.size();i++) { delete Icespells[i];}
+  //deallocate Firespells
+  for(int i=0;i<Firespells.size();i++) { delete Firespells[i];}
+  //deallocate Lightingspells
+  for(int i=0;i<Lightingspells.size();i++) { delete Lightingspells[i];}
+  cout << "Just destroyed a Hero" << endl;
+}
+
 
 
 /**************************** HERO FUNCTIONS ****************************/
@@ -289,23 +305,35 @@ void Hero::add_firespell(Firespell * a){
 void Hero::add_lightingspell(Lightingspell * a){
   Lightingspells.push_back(a);
 }
-void Hero::remove_weapon(int a){
+void Hero::remove_weapon(int a){  //when we remove items from the inventory we also deallocate their memory space cause they were newly created by copy construction
+  Weapon *tmp=Weapons[a];
   Weapons.erase(Weapons.begin()+a);
+  delete tmp;
 }
 void Hero::remove_armor(int a){
+  Armor *tmp=Armour[a];
   Armour.erase(Armour.begin()+a);
+  delete tmp;
 }
 void Hero::remove_potion(int a){
+  Potion *tmp=Potions[a];
   Potions.erase(Potions.begin()+a);
+  delete tmp;
 }
 void Hero::remove_icespell(int a){
+  Icespell *tmp=Icespells[a];
   Icespells.erase(Icespells.begin()+a);
+  delete tmp;
 }
 void Hero::remove_firespell(int a){
+  Firespell *tmp=Firespells[a];
   Firespells.erase(Firespells.begin()+a);
+  delete tmp;
 }
 void Hero::remove_lightingspell(int a){
+  Lightingspell *tmp=Lightingspells[a];
   Lightingspells.erase(Lightingspells.begin()+a);
+  delete tmp;
 }
 void Hero::remove_gold(int a){
   gold=gold-a;
@@ -313,4 +341,3 @@ void Hero::remove_gold(int a){
 void Hero::add_gold(int a){
   gold=gold+a;
 }
-

@@ -34,7 +34,6 @@ public:
 
     class Grid* theGrid;
     vector<class Hero * > theHeros;
-    vector<class Monster * > theMonsters;
     Market * theMarket;
 
     Game(int, int);

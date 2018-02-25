@@ -17,7 +17,15 @@ Game::Game(int r, int c)
     theGrid = new class Grid(r, c);
 }
 
-Game::~Game(){;}
+Game::~Game(){
+  //delete the market
+  delete theMarket;
+  //deallocate theHeros vector
+  for(int i=0;i<theHeros.size();i++) {delete theHeros[i];}
+  //deallocate grid
+
+  cout << "Just destroyed the Game" << endl;
+}
 
 void Game::begin()
 {
@@ -28,7 +36,6 @@ void Game::begin()
     add_Hero_Sorcerer(0,0, "Bob", 10);
     add_Hero_Paladin(0,0, "Kayla" , 10);
 
-    add_Monster_Dragon(3, 3, "Josh" , 6);
 
     theGrid->add_Market(1, 1);
     theGrid->add_Market(4, 3);
@@ -115,25 +122,25 @@ int Game::add_Hero_Sorcerer(int r, int c,string nm, int lv, int hlth, int man, i
 
 
 
-int Game::add_Monster_Dragon(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-    class Dragon* myDragon = new class Dragon(nm, lvl, hlth, dmin, dmax, def, miss);
-    theMonsters.push_back(myDragon);
-    return 0;
-}
-
-
-int Game::add_Monster_Spirit(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-    class Spirit* mySpirit = new class Spirit(nm, lvl, hlth, dmin, dmax, def, miss);
-    theMonsters.push_back(mySpirit);
-    return 0;
-}
-
-
-int Game::add_Monster_Exosceleton(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
-    class Exosceleton* myExosceleton = new class Exosceleton(nm, lvl, hlth, dmin, dmax, def, miss);
-    theMonsters.push_back(myExosceleton);
-    return 0;
-}
+// int Game::add_Monster_Dragon(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
+//     class Dragon* myDragon = new class Dragon(nm, lvl, hlth, dmin, dmax, def, miss);
+//     theMonsters.push_back(myDragon);
+//     return 0;
+// }
+//
+//
+// int Game::add_Monster_Spirit(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
+//     class Spirit* mySpirit = new class Spirit(nm, lvl, hlth, dmin, dmax, def, miss);
+//     theMonsters.push_back(mySpirit);
+//     return 0;
+// }
+//
+//
+// int Game::add_Monster_Exosceleton(int r, int c, string nm, int lvl, int hlth, int dmin, int dmax, int def, int miss) {
+//     class Exosceleton* myExosceleton = new class Exosceleton(nm, lvl, hlth, dmin, dmax, def, miss);
+//     theMonsters.push_back(myExosceleton);
+//     return 0;
+// }
 
 
 class Monster * Game::randMonster(Hero * thehero) {
@@ -569,42 +576,42 @@ void Game::printweparray(){
     int k=(int)theMarket->get_weparray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << theMarket->get_weparray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_weparray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_weparray()[i]->get_price()<<" MinLevel = " <<theMarket->get_weparray()[i]->get_minlevel()<<" Damage = "<<theMarket->get_weparray()[i]->get_damage()<<" Hand = "<<theMarket->get_weparray()[i]->get_hand()<< endl;
     }
 }
 void Game::printarmarray(){
     int k=(int)theMarket->get_armarray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << theMarket->get_armarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_armarray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_armarray()[i]->get_price()<<" MinLevel = " <<theMarket->get_armarray()[i]->get_minlevel()<<" Reduction = "<<theMarket->get_armarray()[i]->get_reduction()<< endl;
     }
 }
 void Game::printpotarray(){
     int k=(int)theMarket->get_potarray().size();
     for (int i=0;i<k;i++)
     {
-        cout << i+1 << ". " << theMarket->get_potarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_potarray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_potarray()[i]->get_price()<<" MinLevel = " <<theMarket->get_potarray()[i]->get_minlevel()<<" Ability = "<<theMarket->get_potarray()[i]->get_ability()<<" Increasement = "<<theMarket->get_potarray()[i]->get_increasement()<< endl;
     }
 }
 void Game::printicearray(){
   int k=(int)theMarket->get_icearray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << theMarket->get_icearray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_icearray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_icearray()[i]->get_price()<<" MinLevel = " <<theMarket->get_icearray()[i]->get_minlevel()<<" MinDamage = " <<theMarket->get_icearray()[i]->get_mindamage()<<" MaxDamage = " <<theMarket->get_icearray()[i]->get_maxdamage() << " Reduction = " <<theMarket->get_icearray()[i]->get_reduction()<< " Rounds = " <<theMarket->get_icearray()[i]->get_rounds()<< endl;
   }
 }
 void Game::printfirarray(){
   int k=(int)theMarket->get_firarray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << theMarket->get_firarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_firarray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_firarray()[i]->get_price()<<" MinLevel = " <<theMarket->get_firarray()[i]->get_minlevel()<<" MinDamage = " <<theMarket->get_firarray()[i]->get_mindamage()<<" MaxDamage = " <<theMarket->get_firarray()[i]->get_maxdamage()<< " Reduction = " <<theMarket->get_firarray()[i]->get_reduction()<< " Rounds = " <<theMarket->get_firarray()[i]->get_rounds()<< endl;
   }
 }
 void Game::printligarray(){
   int k=(int)theMarket->get_ligarray().size();
   for (int i=0;i<k;i++)
   {
-        cout << i+1 << ". " << theMarket->get_ligarray()[i]->get_name() << endl;
+        cout << i+1 << ". " << theMarket->get_ligarray()[i]->get_name() <<" -> "<<"Price = "<< theMarket->get_ligarray()[i]->get_price()<<" MinLevel = " <<theMarket->get_ligarray()[i]->get_minlevel()<<" MinDamage = " <<theMarket->get_ligarray()[i]->get_mindamage()<<" MaxDamage = " <<theMarket->get_ligarray()[i]->get_maxdamage()<< " Reduction = " <<theMarket->get_ligarray()[i]->get_reduction()<< " Rounds = " <<theMarket->get_ligarray()[i]->get_rounds()<< endl;
   }
 }
 
@@ -652,7 +659,7 @@ void Game::goShopping() {
     int a;
     for (int i=0; i<k; i++)
     {
-        cout << "Pick one of the following for : " << theHeros[i]->name << endl;
+        cout << "Pick one of the following for : " << theHeros[i]->name << "( Got " << theHeros[i]->gold << " Gold" << " )" << endl;
         cout << "1. Buy  2. Sell  0. Exit" << endl;
         cin >> a;
         if (a==1){
