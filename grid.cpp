@@ -135,7 +135,7 @@ int Grid::updateVisualMap()
 Grid::~Grid()
 {
 
-    //deallocate the array in heap
+    //deallocate the array (square) in heap
     for (int i=0; i<columns; i++)
     {
         for (int j=0; j<rows; j++)
@@ -150,6 +150,8 @@ Grid::~Grid()
     }
 
     delete[] square;
+
+    //deallocate theMap
 
 }
 int Grid::add_Market(int x, int y)

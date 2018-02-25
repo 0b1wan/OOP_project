@@ -2,7 +2,7 @@
 
 Item::Item(string a, int b, int c) : name(a), price(b), minlevel(c)
 {
-    cout << "Just constructed an Item" << endl;
+  ;
 }
 Item::~Item()
 {
@@ -21,7 +21,7 @@ int Item::get_minlevel() const{
 
 Weapon::Weapon(string a, int b, int c, int d, string e) : Item(a,b,c), damage(d), hand(e)
 {
-    cout << "Just constructed a Weapon" << endl;
+  ;
 }
 Weapon::~Weapon()
 {
@@ -38,7 +38,7 @@ string Weapon::get_hand(){
 
 Armor::Armor(string a, int b, int c, int d) : Item(a,b,c), reduction(d)
 {
-    cout << "Just constructed an Armor" << endl;
+  ;
 }
 Armor::~Armor()
 {
@@ -52,7 +52,7 @@ int Armor::get_reduction(){
 
 Potion::Potion(string a, int b, int c, string d, int e) : Item(a,b,c), ability(d), increasement(e)
 {
-    cout << "Just constructed a Potion" << endl;
+  ;
 }
 Potion::~Potion()
 {

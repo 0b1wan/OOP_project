@@ -38,8 +38,9 @@ public:
         max_health = health;
     }
 
-    ~Living()
-    { }
+    ~Living(){
+      ;
+    }
 
     virtual void print_stats() =0;
     virtual string who() =0;
@@ -124,8 +125,7 @@ public:
         current_armor = nullptr;
     }
 
-    ~Hero()
-    { }
+    virtual ~Hero();
 
     // Main functions
     int do_dmg(class Monster*);
@@ -159,6 +159,7 @@ public:
 
     ~Warrior()
     {
+      cout << "Just destoyed a Warrior" << endl;
     }
 
     void level_up();
@@ -180,6 +181,7 @@ public:
 
     ~Sorcerer()
     {
+      cout << "Just destroyed a Sorcerer" << endl;
     }
 
     void level_up();
@@ -200,6 +202,7 @@ public:
 
     ~Paladin()
     {
+      cout << "Just destroyed a Paladin" << endl;
     }
 
     void level_up();
