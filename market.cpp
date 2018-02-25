@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Market::Market() : wepnum(3),armnum(2),potnum(2),icenum(1),firnum(1),lignum(1) {
+Market::Market() {
   //3 wep, 3 arm, 3 pot, 3 spell
     Weapon * temp1 = new Weapon("Sword",150,1,50,"right"); //3 fixed weapons
     weparray.push_back(temp1);
@@ -37,24 +37,6 @@ Market::~Market() {
     //apodesmeush ta items gt stous pinakes exw deiktes
 }
 
-int Market::get_wepnum(){
-  return wepnum;
-}
-int Market::get_armnum(){
-  return armnum;
-}
-int Market::get_potnum(){
-  return potnum;
-}
-int Market::get_icenum(){
-  return icenum;
-}
-int Market::get_firnum(){
-  return firnum;
-}
-int Market::get_lignum(){
-  return lignum;
-}
 vector<Weapon *> Market::get_weparray(){
   return weparray;
 }
@@ -74,7 +56,7 @@ vector<Lightingspell *> Market::get_ligarray(){
   return ligarray;
 }
 
-//void Market::print() {
+//void Market::shopping() {
 //    int k = mygame->total_Heros;
 //    int a;
 //    for (int i=0; i<k; i++)

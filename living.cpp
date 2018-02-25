@@ -261,3 +261,22 @@ void Monster::print_stats()
 string Monster::who() {
     return monster_type + "(" + name + ")";
 }
+
+void Hero::add_weapon(Weapon * a){
+  Weapons.push_back(a);
+}
+void Hero::add_armor(Armor * a){
+  Armour.push_back(a);
+}
+void Hero::add_potion(Potion * a){
+  Potions.push_back(a);
+}
+void Hero::add_icespell(Icespell * a){
+  Icespells.push_back(a);
+}
+void Hero::add_firespell(Firespell * a){
+  Firespells.push_back(a);
+}
+void Hero::add_lightingspell(Lightingspell * a){
+  Lightingspells.push_back(a);
+}

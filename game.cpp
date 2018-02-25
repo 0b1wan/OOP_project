@@ -581,3 +581,133 @@ void Game::printligarray(){
         cout << i+1 << ". " << theMarket->get_ligarray()[i]->get_name() << endl;
   }
 }
+
+void Game::printinventory(){
+  for (int i=0;i<theHeros.size();i++)
+  {
+    cout << "________________________________" << endl;
+    cout << theHeros[i]->name << "'s' inventory is :" << endl;
+    cout << "The Weapons are :" << endl;
+    for (int j=0;j<theHeros[i]->Weapons.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Weapons[j]->get_name() << endl;
+    }
+    cout << "The Armour are :" << endl;
+    for (int j=0; j<theHeros[i]->Armour.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Armour[j]->get_name() << endl;
+    }
+    cout << "The Potions are:" << endl;
+    for (int j=0; j<theHeros[i]->Potions.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Potions[j]->get_name() << endl;
+    }
+    cout << "The Icespells are:" << endl;
+    for (int j=0; j<theHeros[i]->Icespells.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Icespells[j]->get_name() << endl;
+    }
+    cout << "The Firespells are:" << endl;
+    for (int j=0; j<theHeros[i]->Firespells.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Firespells[j]->get_name() << endl;
+    }
+    cout << "The Lightingspells are:" << endl;
+    for (int j=0; j<theHeros[i]->Lightingspells.size();j++)
+    {
+      cout << j+1 << ". " << theHeros[i]->Lightingspells[j]->get_name() << endl;
+    }
+    cout << "________________________________" << endl;
+  }
+}
+
+void Game::shopping() {
+    int k = theHeros.size();
+    int a;
+    for (int i=0; i<k; i++)
+    {
+        cout << "Pick one of the following for : " << theHeros[i]->name << endl;
+        cout << "1. Buy  2. Sell  0. Exit" << endl;
+        cin >> a;
+        if (a==1){
+            cout << "1. Weapons  2. Armor  3. Potions  4. Icespells  5. Firespells  6. Lightingspells  0. Exit" << endl;
+            cin >> a;
+            if (a==1){
+                cout << "Which one of these Weapons do you want to buy?" << endl;
+                printweparray();
+                cin >> a;
+                Weapon * wep = new Weapon(*theMarket->get_weparray()[a-1]);
+                theHeros[i]->add_weapon(wep);
+            }
+            else if (a==2){
+                cout << "Which one of these Armor do you want to buy?" << endl;
+                printarmarray();
+                cin >> a;
+                Armor * arm = new Armor(*theMarket->get_armarray()[a-1]);
+                theHeros[i]->add_armor(arm);
+            }
+            else if (a==3){
+                cout << "Which one of these Potions do you want to buy?" << endl;
+                printpotarray();
+                cin >> a;
+                Potion * pot = new Potion(*theMarket->get_potarray()[a-1]);
+                theHeros[i]->add_potion(pot);
+            }
+            else if (a==4){
+                cout << "Which one of these Icespells do you want to buy?" << endl;
+                printicearray();
+                cin >> a;
+                Icespell * ice = new Icespell(*theMarket->get_icearray()[a-1]);
+                theHeros[i]->add_icespell(ice);
+            }
+            else if (a==5){
+                cout << "Which one of these Firespells do you want to buy?" << endl;
+                printfirarray();
+                cin >> a;
+                Firespell * fir = new Firespell(*theMarket->get_firarray()[a-1]);
+                theHeros[i]->add_firespell(fir);
+            }
+            else if (a==6){
+                cout << "Which one of these Lightingspells do you want to buy?" << endl;
+                printligarray();
+                cin >> a;
+                Lightingspell * lig = new Lightingspell(*theMarket->get_ligarray()[a-1]);
+                theHeros[i]->add_lightingspell(lig);
+            }
+            else continue;
+        }
+//        else if (a==2){
+//            cout << "1. Weapons  2. Armor  3. Potions  0. Exit" << endl;
+//            cin >> a;
+//            if (a==1){
+//                cout << "Which one of these Weapons do you want to sell?" << endl;
+//                for (int i=0; i<theHeros[i]->Weapons.size(); i++)
+//                {
+//                    cout << i+1 << ". " << theHeros[i]->Weapons.name << endl;
+//                }
+//                cin >> a;
+//                //remove to theHeros[i]->Weapons[a-1] apo ta weapons tou hrwa kai add sta lefta tou to (theHeros[i]->Weapons[a-1].price)/2      }
+//            }
+//            if (a==2){
+//                cout << "Which one of these Armor do you want to sell?" << endl;
+//                for (int i=0; i<theHeros[i]->Armour.size(); i++)
+//                {
+//                    cout << i+1 << ". " << theHeros[i]->Armour.name << endl;
+//                }
+//                cin >> a;
+//                //remove to theHeros[i]->Armour[a-1] apo ta Armor tou hrwa kai add sta lefta tou to (theHeros[i]->Armour[a-1].price)/2      }
+//            }
+//            if (a==3){
+//                cout << "Which one of these Potions do you want to sell?" << endl;
+//                for (int i=0; i<theHeros[i]->Potions.size(); i++)
+//                {
+//                    cout << i+1 << ". " << theHeros[i]->Potions.name << endl;
+//                }
+//                cin >> a;
+//                //remove to theHeros[i]->Potions[a-1] apo ta potions tou hrwa kai add sta lefta tou to (theHeros[i]->Potions[a-1].price)/2      }
+//            }
+//            else continue;
+//        }
+//        else continue;
+//    }
+}}
