@@ -204,6 +204,15 @@ void Paladin::level_up()
 }
 
 
+void Hero::heal() {
+    if (health < max_health)
+        health += health*0.1;
+    if (health > max_health)
+        health = max_health;
+}
+
+
+
 /**************************** MONSTER FUNCTIONS ****************************/
 /***************************************************************************/
 
@@ -304,3 +313,4 @@ void Hero::remove_gold(int a){
 void Hero::add_gold(int a){
   gold=gold+a;
 }
+

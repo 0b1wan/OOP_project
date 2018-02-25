@@ -123,6 +123,8 @@ public:
     void accept_exp(class Monster*);
     void attack(class Monster*, int times=999999);
 
+    void heal();
+
     virtual void level_up();
 
     // Helper functions

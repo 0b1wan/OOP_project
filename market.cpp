@@ -56,7 +56,7 @@ vector<Lightingspell *> Market::get_ligarray(){
   return ligarray;
 }
 
-//void Market::shopping() {
+//void Market::goShopping() {
 //    int k = mygame->total_Heros;
 //    int a;
 //    for (int i=0; i<k; i++)

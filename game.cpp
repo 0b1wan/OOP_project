@@ -25,8 +25,8 @@ void Game::begin()
     theMarket = new Market;
 
     add_Hero_Warrior(0,0, "Jesus", 9);
-    add_Hero_Sorcerer(0,0, "jessy", 10);
-    add_Hero_Paladin(0,0, "woosy" , 10);
+    add_Hero_Sorcerer(0,0, "Bob", 10);
+    add_Hero_Paladin(0,0, "Kayla" , 10);
 
     add_Monster_Dragon(3, 3, "Josh" , 6);
 
@@ -46,7 +46,9 @@ void Game::begin()
     cout << " Each type has different attribute advantages as he levels up." << endl << endl;
     cout << " Try to take some action..." << endl;
 
-    while (showPossibleActions()) {}
+    while (showPossibleActions() )
+    {
+    }
 
 
 }
@@ -285,6 +287,9 @@ void Game::move_heros(string direction)
     }
     cout << " Moved " << direction << ". Team now at pos [" << fr << "," << fc << "]" << endl;
 
+    // Heal heros after moving them
+    heal_heros();
+
 }
 
 void Game::askToMoveHeros()
@@ -318,6 +323,13 @@ void Game::askToMoveHeros()
     }
 
 }
+
+void Game::heal_heros()
+{
+    for (int i=0; i<total_Heros; i++)
+        theHeros[i]->heal();
+}
+
 
 string StringToUpper(string strToConvert)
 {
@@ -494,29 +506,40 @@ bool Game::showPossibleActions()
     cout << " |                                    |" << endl;
     cout << " |  1. Move team --------> Hotkey: m  |" << endl;
     cout << " |  2. Show Heros -------> Hotkey: h  |" << endl;
-    cout << " |  3. Go to Market -----> Hotkey: b  |" << endl;
+    cout << " |  3. Show Inventory ---> Hotkey: i  |" << endl;
     cout << " |  4. Display the Map --> Hotkey: v  |" << endl;
     cout << " |  5. Exit -------------> Hotkey: q  |" << endl;
     cout << " |                                    |" << endl;
+    if (theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->block_type == "Market") {
+        cout << " |  .. Reenter Market ---> Hotkey: r  |" << endl;
+        cout << " |                                    |" << endl;
+    }
     cout <<" \\------------------------------------/" << endl;
 
     string input;
     do {
         cout << "\n : ";
         cin >> input;
-        if (input != "m" && input != "h" && input != "b" && input != "q" && input != "v")
+        if (theGrid->square[theHeros[0]->r_co][theHeros[0]->c_co]->block_type == "Market") {
+            if (input == "r")
+                break;
+        }
+        if (input != "m" && input != "h" && input != "q" && input != "v" && input != "i")
             cout << "  Invalid input. Try one of the 4 hotkeys..." << endl;
         else
             break;
     } while (1);
 
     cout << endl;
-    if (input == "m")
+    if (input == "r")
+        goShopping();
+    if (input == "m") {
         askToMoveHeros();
+    }
     else if (input == "h")
         showHerosExpanded();
-    else if (input == "b")
-        return true;
+    else if (input == "i")
+        printinventory();
     else if (input == "q")
     {
         cout << " Thanks for playing!" << endl << endl;
@@ -535,6 +558,9 @@ bool Game::showPossibleActions()
 
 void Game::foundMarket() {
 
+    cout << endl << " Welcome to the Market! Here you have the chance to equip your heros with the latest and greatest in Weapons, Armor, Spells and Potions! Enjoy. " << endl << endl;
+
+    goShopping();
 
     return;
 }
@@ -621,8 +647,8 @@ void Game::printinventory(){
   }
 }
 
-void Game::shopping() {
-    int k = theHeros.size();
+void Game::goShopping() {
+    int k = (int)theHeros.size();
     int a;
     for (int i=0; i<k; i++)
     {
