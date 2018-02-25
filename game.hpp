@@ -12,9 +12,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
 #include "grid.hpp"
 #include "living.hpp"
-#include "block.hpp"
 #include "item.h"
 #include "spell.hpp"
 #include "market.h"
@@ -61,7 +61,7 @@ public:
     void move_heros(string direction);
     void surprise(vector<Hero * >);
     void foundMarket();
-    bool  checkHerosAlive();
+    bool checkHerosAlive();
     void printweparray();
     void printarmarray();
     void printpotarray();
